@@ -1,51 +1,85 @@
 import React from 'react';
 
-const experiences = [
+const projects = [
   {
-    title: 'Senior Frontend Developer',
-    company: 'TechCorp Inc.',
-    period: '2022 - Present',
-    description: 'Led development of interactive web applications using React and Three.js, improving user engagement by 40%. Mentored junior developers and established best practices for the frontend team.',
+    title: 'Child Vaccination Reminder & Management System',
+    role: 'Backend Developer',
+    tech: 'Flutter | Node.js, Express.js | MongoDB Atlas | Twilio | Gmail OAuth2 | Cron Jobs',
+    points: [
+      'Developed automated reminder system using Node.js, Express, and Cron Jobs for vaccination alerts',
+      'Integrated Twilio SMS API and Gmail OAuth2 for multi-channel message delivery',
+      'Built reliable notification pipeline with error handling and API endpoints',
+      'Ensured data security through encrypted credentials and secure authentication',
+    ],
   },
   {
-    title: 'Web Developer',
-    company: 'Creative Studio',
-    period: '2020 - 2022',
-    description: 'Built responsive websites and interactive experiences for diverse clients, focusing on performance and accessibility. Collaborated with designers to bring creative visions to life.',
+    title: 'Bingo Multiplayer Game',
+    role: 'Full Stack Developer',
+    tech: 'Node.js | Express.js | WebSockets | HTML | CSS | JavaScript',
+    points: [
+      'Developed real-time Bingo game using WebSockets with solo and multiplayer modes',
+      'Designed modern UI with room creation and fair coin-toss matchmaking',
+      'Optimized server performance for smooth, low-latency gameplay',
+    ],
   },
-  {
-    title: 'Junior Developer',
-    company: 'StartUp Labs',
-    period: '2018 - 2020',
-    description: 'Developed full-stack features for SaaS products using React and Node.js. Participated in agile development cycles and contributed to architectural decisions.',
-  },
+];
+
+const certificates = [
+  'IBM Z Datathon Participation — October 2025',
+  'J.P. Morgan Software Engineering Simulation — September 2025',
+  'Green Sunday Volunteer Program — October 2024',
+  'AI Foundation Certification — April 2024',
 ];
 
 const ExperiencePage: React.FC = () => {
   return (
     <div className="space-y-6">
       <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-6">
-        Experience
+        Projects & Experience
       </h2>
       
       <div className="w-20 h-1 bg-gradient-to-r from-primary to-transparent mb-8" />
       
       <div className="space-y-8">
-        {experiences.map((exp, idx) => (
+        {projects.map((project, idx) => (
           <div key={idx} className="relative pl-8 border-l-2 border-primary/30">
             {/* Timeline dot */}
             <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
             
             <div>
               <h3 className="text-xl font-display font-semibold text-foreground">
-                {exp.title}
+                {project.title}
               </h3>
-              <p className="text-primary font-medium">{exp.company}</p>
-              <p className="text-sm text-muted-foreground mb-2">{exp.period}</p>
-              <p className="text-foreground leading-relaxed">{exp.description}</p>
+              <p className="text-primary font-medium">{project.role}</p>
+              <p className="text-xs text-muted-foreground mb-3">{project.tech}</p>
+              <ul className="space-y-1">
+                {project.points.map((point, pointIdx) => (
+                  <li key={pointIdx} className="text-sm text-foreground flex gap-2">
+                    <span className="text-primary">•</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-8">
+        <h3 className="font-display font-semibold text-lg mb-3 flex items-center gap-2">
+          <span className="text-xl">🏆</span>
+          Certificates
+        </h3>
+        <div className="flex flex-wrap gap-2">
+          {certificates.map((cert, idx) => (
+            <span 
+              key={idx}
+              className="px-3 py-1 bg-secondary/50 rounded-full text-xs text-foreground border border-border"
+            >
+              {cert}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );

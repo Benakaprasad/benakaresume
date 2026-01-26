@@ -2,11 +2,12 @@ import React from 'react';
 
 interface LandingStageProps {
   showHint: boolean;
+  isHiding: boolean;
 }
 
-const LandingStage: React.FC<LandingStageProps> = ({ showHint }) => {
+const LandingStage: React.FC<LandingStageProps> = ({ showHint, isHiding }) => {
   return (
-    <div className="flex items-center justify-center min-h-screen px-4">
+    <div className={`flex items-center justify-center min-h-screen px-4 transition-all duration-700 ${isHiding ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
       <div className="text-center max-w-2xl">
         <h1 className="text-5xl md:text-7xl font-display font-bold text-foreground mb-6 leading-tight">
           Welcome to My
