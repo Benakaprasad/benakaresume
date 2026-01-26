@@ -2,24 +2,29 @@ import React from 'react';
 
 const skillCategories = [
   {
-    title: 'Frontend',
-    icon: '🎨',
-    skills: ['React & Next.js', 'TypeScript', 'Tailwind CSS', 'Three.js & WebGL', 'Framer Motion'],
+    title: 'Languages',
+    icon: '💻',
+    skills: ['C', 'Java', 'Python', 'SQL', 'HTML5', 'CSS3', 'JavaScript'],
   },
   {
-    title: 'Backend',
-    icon: '⚙️',
-    skills: ['Node.js & Express', 'Python & Django', 'PostgreSQL', 'MongoDB', 'REST & GraphQL'],
+    title: 'Frameworks',
+    icon: '🚀',
+    skills: ['Node.js', 'Express.js', 'React', 'WebSockets.io'],
   },
   {
-    title: 'Tools & DevOps',
+    title: 'Tools & Databases',
     icon: '🛠️',
-    skills: ['Git & GitHub', 'Docker', 'CI/CD Pipelines', 'AWS & Vercel', 'Testing (Jest, Cypress)'],
+    skills: ['MongoDB', 'MySQL', 'Git', 'GitHub'],
+  },
+  {
+    title: 'Platforms',
+    icon: '💡',
+    skills: ['PyCharm', 'Visual Studio Code', 'IntelliJ IDE'],
   },
   {
     title: 'Soft Skills',
     icon: '🤝',
-    skills: ['Team Leadership', 'Agile/Scrum', 'Technical Writing', 'Problem Solving', 'Mentoring'],
+    skills: ['Problem Solving', 'Communication', 'Adaptability', 'Task Prioritization', 'Teamwork'],
   },
 ];
 
@@ -27,32 +32,31 @@ const SkillsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-6">
-        Skills
+        Technical Skills
       </h2>
       
       <div className="w-20 h-1 bg-gradient-to-r from-primary to-transparent mb-8" />
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {skillCategories.map((category, idx) => (
           <div 
             key={idx} 
-            className="p-5 bg-secondary/30 rounded-lg border border-border hover:border-primary/50 transition-colors"
+            className="p-4 bg-secondary/30 rounded-lg border border-border hover:border-primary/50 transition-colors"
           >
             <h3 className="font-display font-semibold text-lg mb-3 flex items-center gap-2">
               <span className="text-xl">{category.icon}</span>
               {category.title}
             </h3>
-            <ul className="space-y-2">
+            <div className="flex flex-wrap gap-2">
               {category.skills.map((skill, skillIdx) => (
-                <li 
+                <span 
                   key={skillIdx}
-                  className="flex items-center gap-2 text-foreground"
+                  className="px-3 py-1 bg-primary/10 rounded-full text-sm text-foreground border border-primary/20"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                   {skill}
-                </li>
+                </span>
               ))}
-            </ul>
+            </div>
           </div>
         ))}
       </div>

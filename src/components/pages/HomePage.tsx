@@ -5,24 +5,25 @@ const HomePage: React.FC = () => {
     <div className="space-y-6">
       <div className="text-center mb-8">
         <h1 className="text-4xl md:text-5xl font-display font-bold text-primary mb-4">
-          John Developer
+          Benaka Prasad M
         </h1>
         <p className="text-xl text-muted-foreground font-serif italic">
-          Full Stack Developer & Creative Technologist
+          Full Stack Developer & MERN Stack Enthusiast
         </p>
       </div>
       
       <div className="w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-8" />
       
       <p className="text-lg leading-relaxed text-foreground">
-        Welcome to my portfolio! I'm passionate about creating unique, interactive web experiences
-        that blend creativity with cutting-edge technology. This portfolio itself is a testament
-        to that philosophy—featuring an interactive owl companion that responds to your actions.
+        I am an aspiring Full Stack Developer with a strong foundation in the MERN stack 
+        (MongoDB, Express.js, React, Node.js) and a passion for building seamless, efficient, 
+        and user-focused web applications.
       </p>
       
       <p className="text-lg leading-relaxed text-foreground">
-        Browse through the pages using the navigation on the left or the arrows below. 
-        Each section reveals more about my journey, skills, and passion for development.
+        Adept at translating ideas into responsive and scalable digital solutions that prioritize 
+        performance, data privacy, and intuitive user experiences. Driven by curiosity and continuous 
+        learning, I aim to leverage technology to solve real-world problems.
       </p>
       
       <div className="mt-8 p-4 bg-primary/10 rounded-lg border border-primary/20">

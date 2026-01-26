@@ -1,11 +1,11 @@
 import React from 'react';
-import { Mail, Linkedin, Github, MapPin } from 'lucide-react';
+import { Mail, Linkedin, Github, Phone } from 'lucide-react';
 
 const contactInfo = [
-  { icon: Mail, label: 'Email', value: 'john.developer@email.com', href: 'mailto:john.developer@email.com' },
-  { icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/johndeveloper', href: 'https://linkedin.com/in/johndeveloper' },
-  { icon: Github, label: 'GitHub', value: 'github.com/johndeveloper', href: 'https://github.com/johndeveloper' },
-  { icon: MapPin, label: 'Location', value: 'San Francisco, CA', href: null },
+  { icon: Mail, label: 'Email', value: 'benakaprasadm82@gmail.com', href: 'mailto:benakaprasadm82@gmail.com' },
+  { icon: Phone, label: 'Phone', value: '+91 7483622436', href: 'tel:+917483622436' },
+  { icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/benakaprasadm', href: 'https://linkedin.com/in/benakaprasadm' },
+  { icon: Github, label: 'GitHub', value: 'github.com/Benakaprasad', href: 'https://github.com/Benakaprasad' },
 ];
 
 const ContactPage: React.FC = () => {
@@ -33,18 +33,14 @@ const ContactPage: React.FC = () => {
             </div>
             <div>
               <p className="text-sm text-muted-foreground font-medium">{item.label}</p>
-              {item.href ? (
-                <a 
-                  href={item.href}
-                  target={item.href.startsWith('mailto') ? undefined : '_blank'}
-                  rel="noopener noreferrer"
-                  className="text-foreground hover:text-primary transition-colors"
-                >
-                  {item.value}
-                </a>
-              ) : (
-                <p className="text-foreground">{item.value}</p>
-              )}
+              <a 
+                href={item.href}
+                target={item.href.startsWith('mailto') || item.href.startsWith('tel') ? undefined : '_blank'}
+                rel="noopener noreferrer"
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                {item.value}
+              </a>
             </div>
           </div>
         ))}

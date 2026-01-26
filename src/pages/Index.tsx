@@ -10,6 +10,7 @@ import AboutPage from '@/components/pages/AboutPage';
 import ExperiencePage from '@/components/pages/ExperiencePage';
 import SkillsPage from '@/components/pages/SkillsPage';
 import ContactPage from '@/components/pages/ContactPage';
+import { useOwlSounds } from '@/hooks/useOwlSounds';
 
 type Stage = 'landing' | 'terminal' | 'resume';
 
@@ -28,6 +29,9 @@ const Index: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [showHint, setShowHint] = useState(true);
   const [showMail, setShowMail] = useState(false);
+  const [isLandingHiding, setIsLandingHiding] = useState(false);
+
+  const { playHoot, playWingFlap, playSleepy } = useOwlSounds();
 
   // Hide hint after 5 seconds
   useEffect(() => {
@@ -54,10 +58,13 @@ const Index: React.FC = () => {
   const handleOwlClick = useCallback(() => {
     if (stage === 'landing') {
       setShowHint(false);
+      setIsLandingHiding(true); // Start hiding landing text
+      playHoot();
       setOwlState('waking');
       
       setTimeout(() => {
         setOwlState('flying');
+        playWingFlap();
         setShowMail(true);
         
         setTimeout(() => {
@@ -70,26 +77,31 @@ const Index: React.FC = () => {
       // Disturb the owl!
       if (darkMode) {
         // Dark mode: owl flies away for 20 seconds
+        playHoot();
         setOwlState('disturbed');
         setTimeout(() => {
+          playWingFlap();
           setOwlState('flyingAway');
           setTimeout(() => {
             // After 20 seconds, owl returns
+            playWingFlap();
             setOwlState('returning');
             setTimeout(() => {
+              playHoot();
               setOwlState('sitting');
             }, 1000);
           }, 20000);
         }, 1000);
       } else {
         // Light mode: owl flaps and tells user to go away
+        playSleepy();
         setOwlState('flapping');
         setTimeout(() => {
           setOwlState('sleeping');
         }, 3000);
       }
     }
-  }, [stage, darkMode]);
+  }, [stage, darkMode, playHoot, playWingFlap, playSleepy]);
 
   const handleTerminalComplete = useCallback(() => {
     setStage('resume');
@@ -146,7 +158,7 @@ const Index: React.FC = () => {
       )}
 
       {/* Landing Stage */}
-      {stage === 'landing' && <LandingStage showHint={showHint} />}
+      {stage === 'landing' && <LandingStage showHint={showHint} isHiding={isLandingHiding} />}
 
       {/* Terminal Stage */}
       {stage === 'terminal' && (
