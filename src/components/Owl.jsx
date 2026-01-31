@@ -1,22 +1,10 @@
-import React from 'react';
-
-export type OwlState = 'sleeping' | 'waking' | 'flying' | 'sitting' | 'disturbed' | 'flapping' | 'flyingAway' | 'returning';
-
-interface OwlProps {
-  state: OwlState;
-  isDarkMode: boolean;
-  stage: 'landing' | 'terminal' | 'resume';
-  onClick: () => void;
-  showMail?: boolean;
-}
-
-const Owl: React.FC<OwlProps> = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
+const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
   const getPositionClasses = () => {
-    if (stage === 'landing') return 'bottom-8 right-8';
-    if (state === 'flying') return 'bottom-8 right-8'; // Start position, animation handles movement
-    if (state === 'flyingAway') return 'top-8 right-32';
-    if (state === 'returning') return 'top-8 right-32';
-    return 'top-8 right-32';
+    if (stage === 'landing') return 'bottom-4 right-4 md:bottom-8 md:right-8';
+    if (state === 'flying') return 'bottom-8 right-8';
+    if (state === 'flyingAway') return 'top-4 right-4 md:top-8 md:right-16';
+    if (state === 'returning') return 'top-4 right-4 md:top-8 md:right-16';
+    return 'top-4 right-4 md:top-8 md:right-16';
   };
 
   const getAnimationClass = () => {
@@ -31,7 +19,6 @@ const Owl: React.FC<OwlProps> = ({ state, isDarkMode, stage, onClick, showMail =
     }
   };
 
-  const isEyesOpen = isDarkMode || state === 'waking' || state === 'flying' || state === 'sitting' || state === 'disturbed' || state === 'flyingAway' || state === 'returning';
   const isAsleep = state === 'sleeping' || (!isDarkMode && stage === 'resume' && state !== 'flapping' && state !== 'waking');
 
   return (
@@ -40,8 +27,8 @@ const Owl: React.FC<OwlProps> = ({ state, isDarkMode, stage, onClick, showMail =
       onClick={onClick}
       title={isAsleep ? "Zzz... Click to wake me!" : "Hoot hoot!"}
     >
-      <svg width="120" height="150" viewBox="0 0 120 150" className="drop-shadow-lg">
-        {/* Branch - only on landing and resume */}
+      <svg width="100" height="130" viewBox="0 0 120 150" className="drop-shadow-lg w-20 h-26 md:w-[100px] md:h-[130px]">
+        {/* Branch */}
         {(stage === 'landing' || stage === 'resume') && state !== 'flying' && state !== 'flyingAway' && (
           <g>
             <path 
@@ -58,9 +45,8 @@ const Owl: React.FC<OwlProps> = ({ state, isDarkMode, stage, onClick, showMail =
               strokeWidth="4"
               strokeLinecap="round"
             />
-            {/* Small leaves */}
-            <ellipse cx="15" cy="128" rx="8" ry="4" fill="hsl(80, 30%, 45%)" transform="rotate(-20, 15, 128)" />
-            <ellipse cx="100" cy="125" rx="8" ry="4" fill="hsl(80, 30%, 45%)" transform="rotate(15, 100, 125)" />
+            <ellipse cx="15" cy="128" rx="8" ry="4" fill="hsl(140, 40%, 35%)" transform="rotate(-20, 15, 128)" />
+            <ellipse cx="100" cy="125" rx="8" ry="4" fill="hsl(140, 40%, 35%)" transform="rotate(15, 100, 125)" />
           </g>
         )}
         
@@ -81,40 +67,30 @@ const Owl: React.FC<OwlProps> = ({ state, isDarkMode, stage, onClick, showMail =
           className={state === 'flying' || state === 'flapping' || state === 'flyingAway' ? 'origin-left animate-flap' : ''}
         />
         
-        {/* Belly pattern */}
+        {/* Belly */}
         <ellipse cx="60" cy="95" rx="22" ry="30" fill="hsl(35, 35%, 70%)" />
         <ellipse cx="60" cy="100" rx="18" ry="24" fill="hsl(35, 40%, 75%)" />
         
-        {/* Feather lines on belly */}
-        <path d="M 50 80 Q 60 85 70 80" fill="none" stroke="hsl(25, 20%, 50%)" strokeWidth="1" opacity="0.5" />
-        <path d="M 48 90 Q 60 95 72 90" fill="none" stroke="hsl(25, 20%, 50%)" strokeWidth="1" opacity="0.5" />
-        <path d="M 46 100 Q 60 105 74 100" fill="none" stroke="hsl(25, 20%, 50%)" strokeWidth="1" opacity="0.5" />
-        
-        {/* Eye circles (white) */}
+        {/* Eye circles */}
         <circle cx="48" cy="65" r="14" fill="white" stroke="hsl(25, 20%, 30%)" strokeWidth="2" />
         <circle cx="72" cy="65" r="14" fill="white" stroke="hsl(25, 20%, 30%)" strokeWidth="2" />
         
-        {/* Eyes - pupils or closed lines */}
+        {/* Eyes */}
         {isAsleep ? (
           <>
-            {/* Closed eyes */}
             <path d="M 40 65 Q 48 68 56 65" fill="none" stroke="hsl(25, 30%, 20%)" strokeWidth="2.5" strokeLinecap="round" />
             <path d="M 64 65 Q 72 68 80 65" fill="none" stroke="hsl(25, 30%, 20%)" strokeWidth="2.5" strokeLinecap="round" />
-            {/* Zzz */}
-            <text x="85" y="45" fill="hsl(35, 20%, 50%)" fontSize="14" fontWeight="bold" className="animate-pulse">z</text>
-            <text x="95" y="35" fill="hsl(35, 20%, 50%)" fontSize="12" fontWeight="bold" className="animate-pulse">z</text>
-            <text x="102" y="28" fill="hsl(35, 20%, 50%)" fontSize="10" fontWeight="bold" className="animate-pulse">z</text>
+            <text x="85" y="45" fill="hsl(200, 60%, 50%)" fontSize="14" fontWeight="bold" className="animate-pulse">z</text>
+            <text x="95" y="35" fill="hsl(200, 60%, 50%)" fontSize="12" fontWeight="bold" className="animate-pulse">z</text>
+            <text x="102" y="28" fill="hsl(200, 60%, 50%)" fontSize="10" fontWeight="bold" className="animate-pulse">z</text>
           </>
         ) : (
           <>
-            {/* Open eyes with pupils */}
             <circle cx="48" cy="65" r="7" fill="hsl(25, 30%, 15%)" />
             <circle cx="72" cy="65" r="7" fill="hsl(25, 30%, 15%)" />
-            {/* Eye shine */}
             <circle cx="51" cy="62" r="2.5" fill="white" />
             <circle cx="75" cy="62" r="2.5" fill="white" />
             
-            {/* Eyebrows when disturbed */}
             {(state === 'disturbed' || state === 'flapping') && (
               <>
                 <path d="M 38 52 L 58 56" stroke="hsl(25, 30%, 25%)" strokeWidth="3" strokeLinecap="round" />
@@ -130,8 +106,6 @@ const Owl: React.FC<OwlProps> = ({ state, isDarkMode, stage, onClick, showMail =
         {/* Ear tufts */}
         <path d="M 35 45 L 28 28 L 42 38 Z" fill="hsl(25, 25%, 42%)" />
         <path d="M 85 45 L 92 28 L 78 38 Z" fill="hsl(25, 25%, 42%)" />
-        
-        {/* Inner ear tufts */}
         <path d="M 36 44 L 32 32 L 40 40 Z" fill="hsl(25, 20%, 35%)" />
         <path d="M 84 44 L 88 32 L 80 40 Z" fill="hsl(25, 20%, 35%)" />
         
@@ -143,29 +117,29 @@ const Owl: React.FC<OwlProps> = ({ state, isDarkMode, stage, onClick, showMail =
           </g>
         )}
         
-        {/* Mail envelope - only during flying */}
+        {/* Mail */}
         {showMail && (
           <g className={state === 'flying' ? '' : 'animate-drop'}>
-            <rect x="45" y="125" width="30" height="22" rx="2" fill="hsl(38, 40%, 85%)" stroke="hsl(25, 45%, 35%)" strokeWidth="1.5" />
-            <path d="M 45 127 L 60 140 L 75 127" fill="none" stroke="hsl(25, 45%, 35%)" strokeWidth="1.5" />
-            <circle cx="60" cy="133" r="4" fill="hsl(0, 60%, 45%)" />
+            <rect x="45" y="125" width="30" height="22" rx="2" fill="hsl(45, 50%, 92%)" stroke="hsl(220, 50%, 45%)" strokeWidth="1.5" />
+            <path d="M 45 127 L 60 140 L 75 127" fill="none" stroke="hsl(220, 50%, 45%)" strokeWidth="1.5" />
+            <circle cx="60" cy="133" r="4" fill="hsl(0, 60%, 50%)" />
           </g>
         )}
       </svg>
       
-      {/* Speech bubble when disturbed */}
+      {/* Speech bubble */}
       {state === 'flapping' && (
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-white dark:bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-lg border-2 border-primary/30">
-          <span className="font-display">Let me sleep! 💤</span>
+        <div className="absolute -top-14 left-1/2 -translate-x-1/2 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-lg border border-border">
+          <span className="font-medium">Let me sleep! 💤</span>
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
-            <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white dark:border-t-card" />
+            <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-card" />
           </div>
         </div>
       )}
       
       {state === 'disturbed' && isDarkMode && (
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-lg border-2 border-primary/30">
-          <span className="font-display">I'll be back! 🦉</span>
+        <div className="absolute -top-14 left-1/2 -translate-x-1/2 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-lg border border-border">
+          <span className="font-medium">I'll be back! 🦉</span>
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
             <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-card" />
           </div>

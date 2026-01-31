@@ -1,24 +1,20 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-interface TerminalProps {
-  onComplete: () => void;
-}
-
-const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
+const Terminal = ({ onComplete }) => {
   const [input, setInput] = useState('');
-  const [lines, setLines] = useState<string[]>([
-    '╔════════════════════════════════════════════════════════╗',
-    '║     🦉 OWL MAIL DELIVERY SYSTEM v1.0.0                 ║',
-    '║     A letter has arrived for you...                   ║',
-    '╚════════════════════════════════════════════════════════╝',
+  const [lines, setLines] = useState([
+    '╔══════════════════════════════════════════════════════════╗',
+    '║         🦉 OWL MAIL DELIVERY SYSTEM v2.0.0               ║',
+    '║         A letter has arrived for you...                  ║',
+    '╚══════════════════════════════════════════════════════════╝',
     '',
     '> You have received a sealed envelope.',
     '> To open and view the contents, type "start" and press Enter.',
     '',
   ]);
   const [isLoading, setIsLoading] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -30,7 +26,7 @@ const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
     }
   }, [lines]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (isLoading) return;
 
@@ -45,11 +41,11 @@ const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
         { text: '📂 Unfolding the parchment...', delay: 800 },
         { text: '🔍 Connecting to resume database...', delay: 1200 },
         { text: '📥 Fetching resume.scroll...', delay: 1600 },
-        { text: '✨ Decrypting ancient knowledge...', delay: 2000 },
-        { text: '📖 Rendering contents on parchment...', delay: 2400 },
+        { text: '✨ Decrypting professional data...', delay: 2000 },
+        { text: '📖 Rendering portfolio contents...', delay: 2400 },
         { text: '', delay: 2600 },
         { text: '═══════════════════════════════════════', delay: 2800 },
-        { text: '✅ SUCCESS! Opening portfolio scroll...', delay: 3000 },
+        { text: '✅ SUCCESS! Opening portfolio...', delay: 3000 },
         { text: '═══════════════════════════════════════', delay: 3200 },
       ];
 
@@ -67,7 +63,7 @@ const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
         ...prev,
         '',
         '📖 Available commands:',
-        '   start  - Open the portfolio scroll',
+        '   start  - Open the portfolio',
         '   help   - Show this help message',
         '   clear  - Clear the terminal',
         '',
@@ -86,21 +82,21 @@ const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
 
   return (
     <div className="w-full max-w-3xl mx-auto p-4">
-      <div className="bg-terminal-bg rounded-xl overflow-hidden shadow-2xl terminal-glow border-2 border-terminal-border/50">
+      <div className="bg-terminal-bg rounded-2xl overflow-hidden shadow-2xl terminal-glow border border-terminal-border/30">
         {/* Terminal header */}
-        <div className="bg-gradient-to-r from-gray-800 to-gray-700 px-4 py-3 flex items-center gap-2">
+        <div className="bg-gradient-to-r from-slate-800 to-slate-700 px-4 py-3 flex items-center gap-2">
           <div className="flex gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 transition-colors" />
-            <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 transition-colors" />
+            <div className="w-3 h-3 rounded-full bg-red-500" />
+            <div className="w-3 h-3 rounded-full bg-yellow-500" />
+            <div className="w-3 h-3 rounded-full bg-green-500" />
           </div>
-          <span className="ml-4 text-gray-400 text-sm font-mono">owl-mail-terminal</span>
+          <span className="ml-4 text-slate-400 text-sm font-mono">owl-mail-terminal</span>
         </div>
 
         {/* Terminal content */}
         <div 
           ref={containerRef}
-          className="p-6 h-96 overflow-y-auto font-mono text-sm leading-relaxed scrollbar-thin scrollbar-thumb-terminal-text/20 scrollbar-track-transparent"
+          className="p-4 md:p-6 h-80 md:h-96 overflow-y-auto font-mono text-xs md:text-sm leading-relaxed"
         >
           {lines.map((line, index) => (
             <div 
@@ -119,7 +115,7 @@ const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                className="flex-1 bg-transparent text-terminal-text outline-none caret-terminal-text"
+                className="flex-1 bg-transparent text-terminal-text outline-none caret-terminal-text font-mono"
                 disabled={isLoading}
                 autoComplete="off"
                 spellCheck={false}
@@ -130,9 +126,8 @@ const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
         </div>
       </div>
       
-      {/* Hint text */}
       <p className="text-center mt-4 text-muted-foreground text-sm">
-        Type <code className="bg-muted px-2 py-1 rounded text-primary font-mono">start</code> to begin your journey
+        Type <code className="bg-muted px-2 py-1 rounded text-primary font-mono">start</code> to begin
       </p>
     </div>
   );
