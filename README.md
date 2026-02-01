@@ -11,7 +11,7 @@ Follow these steps:
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
-git clone <>
+git clone <https://github.com/Benakaprasad/benakaresume.git>
 
 # Step 2: Navigate to the project directory.
 cd <benakaresume>
