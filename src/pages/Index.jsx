@@ -172,6 +172,8 @@ const Index = () => {
         <BabyOwl 
           stage={babyOwlStage}
           onLanded={handleBabyOwlLanded}
+          parentOwlState={owlState}
+          isDarkMode={darkMode}
         />
       )}
       
