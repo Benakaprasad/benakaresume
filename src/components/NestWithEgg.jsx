@@ -7,8 +7,8 @@ const NestWithEgg = ({ onEggClick, isHatched }) => {
       onClick={onEggClick}
       title="Click me! 🥚"
     >
-      {/* Click me tooltip */}
-      <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-lg text-xs font-bold whitespace-nowrap animate-bounce pointer-events-none">
+      {/* Click me tooltip - properly positioned */}
+      <div className="absolute -top-10 left-8 bg-primary text-primary-foreground px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap animate-bounce pointer-events-none shadow-lg">
         Click me! 👆
       </div>
 
