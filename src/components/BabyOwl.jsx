@@ -3,15 +3,15 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode }) => {
     if (stage === 'hatching') return 'top-4 left-20 scale-0';
     if (stage === 'flying') return 'top-4 left-20';
     
-    // Follow parent owl when it flies away
-    if (stage === 'landed' && parentOwlState === 'flyingAway') {
-      return 'top-4 right-4 md:top-8 md:right-16';
+    // Follow parent owl when it flies away - with delay
+    if (stage === 'followingParent') {
+      return 'top-4 right-[-10px] md:top-8 md:right-[-20px]';
     }
-    if (stage === 'landed' && parentOwlState === 'returning') {
+    if (stage === 'returningWithParent') {
       return 'top-4 right-4 md:top-8 md:right-16';
     }
     
-    // Sit to the RIGHT of parent owl (further right)
+    // Normal sitting position
     if (stage === 'landed') return 'top-4 right-[-10px] md:top-8 md:right-[-20px]';
     return 'top-4 right-[-10px] md:top-8 md:right-[-20px]';
   };
@@ -20,12 +20,12 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode }) => {
     if (stage === 'hatching') return 'animate-hatch';
     if (stage === 'flying') return 'animate-baby-fly';
     
-    // Follow parent when flying away
-    if (stage === 'landed' && parentOwlState === 'flyingAway') {
-      return 'animate-baby-fly-away';
+    // Follow parent with delay
+    if (stage === 'followingParent') {
+      return 'animate-baby-fly-away-delayed';
     }
-    if (stage === 'landed' && parentOwlState === 'returning') {
-      return 'animate-baby-return';
+    if (stage === 'returningWithParent') {
+      return 'animate-baby-return-delayed';
     }
     
     if (stage === 'landed') return 'animate-breathe';
@@ -33,12 +33,13 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode }) => {
   };
 
   const isFlying = stage === 'flying' || 
-                   (stage === 'landed' && (parentOwlState === 'flyingAway' || parentOwlState === 'returning'));
+                   stage === 'followingParent' || 
+                   stage === 'returningWithParent';
 
   // Baby owl sleeps in light mode, awake in dark mode (like parent)
   const isAsleep = !isDarkMode && stage === 'landed' && !isFlying;
 
-  // Show speech bubble when following parent (disturbed state)
+  // Show speech bubble when parent is disturbed and baby is about to follow
   const showSpeechBubble = stage === 'landed' && 
                            parentOwlState === 'disturbed' && 
                            isDarkMode;
@@ -137,7 +138,7 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode }) => {
               <circle cx="50" cy="43" r="2" fill="white" />
               
               {/* Worried eyebrows when following parent */}
-              {(parentOwlState === 'disturbed' || parentOwlState === 'flyingAway') && (
+              {(stage === 'followingParent' || parentOwlState === 'disturbed') && (
                 <>
                   <path d="M 25 38 L 38 40" stroke="hsl(25, 30%, 25%)" strokeWidth="2" strokeLinecap="round" />
                   <path d="M 55 38 L 42 40" stroke="hsl(25, 30%, 25%)" strokeWidth="2" strokeLinecap="round" />
