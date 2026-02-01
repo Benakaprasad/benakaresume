@@ -167,6 +167,15 @@ const handleEggClick = useCallback(() => {
   }, 300);
 }, [darkMode]);
 
+  const handleResetEgg = useCallback(() => {
+  // Clear localStorage
+  localStorage.removeItem('babyOwlHatched');
+  // Reset states
+  setIsEggHatched(false);
+  setIsEggCracking(false);
+  setBabyOwlStage('egg');
+}, []);
+
   // Handle baby owl landing
   const handleBabyOwlLanded = useCallback(() => {
     setBabyOwlStage('landed');
@@ -249,10 +258,12 @@ const handleEggClick = useCallback(() => {
 
       {stage === 'resume' && (
         <>
+          // Pass it to Navigation
           <Navigation 
             currentPage={activeSection} 
             onPageChange={scrollToSection}
             babyOwlHatched={isEggHatched}
+            onResetEgg={handleResetEgg}
           />
           <ThemeToggle isDarkMode={darkMode} onToggle={toggleTheme} />
           
