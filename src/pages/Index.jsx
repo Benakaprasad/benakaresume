@@ -141,17 +141,23 @@ const Index = () => {
 }, [stage, darkMode]);
 
   // Handle egg click - hatch the baby owl
-  const handleEggClick = useCallback(() => {
-    if (isEggHatched || babyOwlStage !== 'egg') return;
+const handleEggClick = useCallback(() => {
+  if (isEggHatched || babyOwlStage !== 'egg') return;
 
+  // Start egg cracking animation
+  setIsEggCracking(true);
+  
+  setTimeout(() => {
     // Egg cracking animation
     setBabyOwlStage('hatching');
     
     setTimeout(() => {
       // Baby owl hatches and starts flying
       setBabyOwlStage('flying');
+      setIsEggCracking(false);
     }, 800);
-  }, [isEggHatched, babyOwlStage]);
+  }, 1000); // Give time for crack animation
+}, [isEggHatched, babyOwlStage]);
 
   // Handle baby owl landing
   const handleBabyOwlLanded = useCallback(() => {
@@ -179,6 +185,7 @@ const Index = () => {
         <NestWithEgg 
           onEggClick={handleEggClick}
           isHatched={isEggHatched}
+          isEggCracking={isEggCracking}
         />
       )}
 
