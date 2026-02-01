@@ -129,6 +129,19 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
     <ellipse cx="460" cy="125" rx="8" ry="4" fill="hsl(140, 40%, 35%)" transform="rotate(15, 460, 125)" />
     <ellipse cx="50" cy="130" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(5, 50, 130)" />
     <ellipse cx="95" cy="132" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(-8, 95, 132)" />
+    {/* Baby owl feet on the branch - rendered AFTER branch so they appear on top */}
+    <g transform="translate(650, 45)">
+      <path d="M 34 82 L 31 90 M 34 82 L 34 90 M 34 82 L 37 90" 
+        stroke="hsl(35, 60%, 45%)" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+      />
+      <path d="M 46 82 L 43 90 M 46 82 L 46 90 M 46 82 L 49 90" 
+        stroke="hsl(35, 60%, 45%)" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+      />
+    </g>
   </svg>
 )}
 

@@ -8,10 +8,22 @@ const NestWithEgg = ({ onEggClick, isHatched, isEggCracking }) => {
       title="Click me! 🥚"
     >
       {/* Click me tooltip - properly positioned */}
-      <div className="absolute -top-10 left-8 bg-primary text-primary-foreground px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap animate-bounce pointer-events-none shadow-lg">
-        Click me! 👆
+      <div className="absolute top-6 -right-20 bg-primary text-primary-foreground px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap animate-bounce pointer-events-none shadow-xl border-2 border-primary-foreground/20">
+        Click me!
+        <div 
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '-12px',
+            transform: 'translateY(-50%)',
+            width: 0,
+            height: 0,
+            borderTop: '12px solid transparent',
+            borderBottom: '12px solid transparent',
+            borderRight: '12px solid hsl(var(--primary))'
+          }}
+        />
       </div>
-
       <svg width="100" height="110" viewBox="0 0 100 110" className="drop-shadow-lg">
         {/* Branch for the nest - proper tree branch */}
         <g>
@@ -88,7 +100,7 @@ const NestWithEgg = ({ onEggClick, isHatched, isEggCracking }) => {
           <ellipse cx="50" cy="74" rx="16" ry="5" fill="hsl(35, 55%, 65%)" opacity="0.7" />
 
           {/* Egg - with cracking animation */}
-          <g className={isEggCracking ? 'animate-egg-crack' : 'animate-breathe'}>
+          <g className={isEggCracking ? 'animate-egg-crack' : 'animate-egg-shake'}>
             {/* Egg shadow */}
             <ellipse cx="50" cy="73" rx="12" ry="2" fill="hsl(0, 0%, 0%)" opacity="0.25" />
             

@@ -225,6 +225,10 @@
     animation: babyReturnDelayed 1.2s ease-out forwards;
   }
   
+  .animate-egg-shake {
+  animation: egg-shake 2s ease-in-out infinite;
+  transform-origin: center bottom;
+  }
   /* Scroll animations */
   .scroll-section {
     opacity: 0;
@@ -479,4 +483,10 @@
     transform: translate(0, 0) rotate(0deg) scale(1);
     opacity: 1;
   }
+}
+
+@keyframes egg-shake {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30%, 50%, 70%, 90% { transform: rotate(-3deg); }
+  20%, 40%, 60%, 80% { transform: rotate(3deg); }
 }
