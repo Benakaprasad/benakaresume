@@ -1,4 +1,4 @@
-const NestWithEgg = ({ onEggClick, isHatched }) => {
+const NestWithEgg = ({ onEggClick, isHatched, isEggCracking }) => {
   if (isHatched) return null;
 
   return (
@@ -87,13 +87,21 @@ const NestWithEgg = ({ onEggClick, isHatched }) => {
           {/* Interior texture - soft material */}
           <ellipse cx="50" cy="74" rx="16" ry="5" fill="hsl(35, 55%, 65%)" opacity="0.7" />
 
-          {/* Egg */}
-          <g className="animate-breathe">
+          {/* Egg - with cracking animation */}
+          <g className={isEggCracking ? 'animate-egg-crack' : 'animate-breathe'}>
             {/* Egg shadow */}
             <ellipse cx="50" cy="73" rx="12" ry="2" fill="hsl(0, 0%, 0%)" opacity="0.25" />
             
             {/* Egg body - slightly larger and more detailed */}
             <ellipse cx="50" cy="62" rx="11" ry="14" fill="hsl(35, 30%, 88%)" stroke="hsl(35, 25%, 75%)" strokeWidth="1" />
+            
+            {/* Crack lines - only show when cracking */}
+            {isEggCracking && (
+              <g>
+                <path d="M 50 52 L 48 58 L 51 64 L 47 68" stroke="hsl(25, 30%, 50%)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+                <path d="M 50 52 L 52 56 L 50 62 L 54 66" stroke="hsl(25, 30%, 50%)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+              </g>
+            )}
             
             {/* Egg spots/texture */}
             <ellipse cx="45" cy="58" rx="2" ry="2.5" fill="hsl(30, 25%, 70%)" opacity="0.4" />
