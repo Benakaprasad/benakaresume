@@ -16,29 +16,25 @@ const LandingStage = ({ showHint, isHiding, onSkipAnimation }) => {
       >
         Skip Animation →
       </button>
+      
       <div className="text-center max-w-3xl">
-        {/* Greeting */}
         <p className="text-lg md:text-xl text-muted-foreground mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
           Hello, I'm
         </p>
         
-        {/* Name */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-foreground mb-4 animate-fade-up" style={{ animationDelay: '0.2s' }}>
           Benaka Prasad M
         </h1>
         
-        {/* Role */}
         <p className="text-xl md:text-2xl lg:text-3xl mb-8 animate-fade-up" style={{ animationDelay: '0.3s' }}>
           <span className="gradient-text font-semibold">Full Stack Developer</span>
         </p>
         
-        {/* Description */}
         <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl mx-auto animate-fade-up" style={{ animationDelay: '0.4s' }}>
           Specializing in MERN Stack development with a passion for building 
           seamless, efficient, and user-focused web applications.
         </p>
         
-        {/* Social Links */}
         <div className="flex justify-center gap-4 mb-12 animate-fade-up" style={{ animationDelay: '0.5s' }}>
           {socialLinks.map((social, idx) => (
             
@@ -54,7 +50,6 @@ const LandingStage = ({ showHint, isHiding, onSkipAnimation }) => {
           ))}
         </div>
         
-        {/* Hint */}
         <div className={`flex flex-col items-center gap-4 transition-opacity duration-500 ${showHint ? 'opacity-100' : 'opacity-0'}`}>
           <div className="flex items-center gap-2 animate-bounce">
             <span className="text-2xl md:text-3xl">👉</span>
@@ -62,7 +57,6 @@ const LandingStage = ({ showHint, isHiding, onSkipAnimation }) => {
           </div>
         </div>
         
-        {/* Decorative line */}
         <div className="mt-12 flex justify-center items-center gap-4 opacity-30">
           <div className="w-12 md:w-20 h-px bg-gradient-to-r from-transparent via-foreground to-transparent" />
           <span className="text-xl md:text-2xl">🦉</span>
