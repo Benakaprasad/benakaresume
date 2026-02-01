@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Owl from '@/components/Owl.jsx';
+import BabyOwl from '@/components/BabyOwl.jsx';
+import NestWithEgg from '@/components/NestWithEgg.jsx';
 import Navigation from '@/components/Navigation.jsx';
 import ThemeToggle from '@/components/ThemeToggle.jsx';
 import LandingStage from '@/components/LandingStage.jsx';
@@ -28,6 +30,19 @@ const Index = () => {
   const [isLandingHiding, setIsLandingHiding] = useState(false);
   const [activeSection, setActiveSection] = useState(0);
   const sectionRefs = useRef([]);
+
+  // Baby owl states
+  const [babyOwlStage, setBabyOwlStage] = useState('egg'); // 'egg', 'hatching', 'flying', 'landed'
+  const [isEggHatched, setIsEggHatched] = useState(false);
+
+  // Check localStorage for hatched state on mount
+  useEffect(() => {
+    const hatched = localStorage.getItem('babyOwlHatched') === 'true';
+    if (hatched) {
+      setIsEggHatched(true);
+      setBabyOwlStage('landed');
+    }
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowHint(false), 5000);
@@ -110,6 +125,27 @@ const Index = () => {
     }
   }, [stage, darkMode]);
 
+  // Handle egg click - hatch the baby owl
+  const handleEggClick = useCallback(() => {
+    if (isEggHatched || babyOwlStage !== 'egg') return;
+
+    // Egg cracking animation
+    setBabyOwlStage('hatching');
+    
+    setTimeout(() => {
+      // Baby owl hatches and starts flying
+      setBabyOwlStage('flying');
+    }, 800);
+  }, [isEggHatched, babyOwlStage]);
+
+  // Handle baby owl landing
+  const handleBabyOwlLanded = useCallback(() => {
+    setBabyOwlStage('landed');
+    setIsEggHatched(true);
+    // Save to localStorage so it persists
+    localStorage.setItem('babyOwlHatched', 'true');
+  }, []);
+
   const toggleTheme = useCallback(() => {
     setDarkMode(prev => !prev);
   }, []);
@@ -123,7 +159,23 @@ const Index = () => {
       {/* Particle Background */}
       <ParticleBackground isDarkMode={darkMode} />
       
-      {/* Owl - always visible */}
+      {/* Nest with Egg - only show in resume stage if not hatched */}
+      {stage === 'resume' && (
+        <NestWithEgg 
+          onEggClick={handleEggClick}
+          isHatched={isEggHatched}
+        />
+      )}
+
+      {/* Baby Owl - show after hatching starts */}
+      {stage === 'resume' && babyOwlStage !== 'egg' && (
+        <BabyOwl 
+          stage={babyOwlStage}
+          onLanded={handleBabyOwlLanded}
+        />
+      )}
+      
+      {/* Parent Owl - always visible */}
       {(owlState !== 'flyingAway' || stage !== 'resume') && owlState !== 'returning' && (
         <Owl
           state={owlState}
@@ -158,7 +210,11 @@ const Index = () => {
 
       {stage === 'resume' && (
         <>
-          <Navigation currentPage={activeSection} onPageChange={scrollToSection} />
+          <Navigation 
+            currentPage={activeSection} 
+            onPageChange={scrollToSection}
+            babyOwlHatched={isEggHatched}
+          />
           <ThemeToggle isDarkMode={darkMode} onToggle={toggleTheme} />
           
           <div className="relative z-10">
