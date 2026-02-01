@@ -6,7 +6,7 @@ const socialLinks = [
   { icon: Mail, href: 'mailto:benakaprasadm82@gmail.com', label: 'Email' },
 ];
 
-const LandingStage = ({ showHint, isHiding }) => {
+const LandingStage = ({ showHint, isHiding, onSkipAnimation }) => {
   return (
     <div className={`flex items-center justify-center min-h-screen px-4 transition-all duration-700 ${isHiding ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
       <button
@@ -41,7 +41,7 @@ const LandingStage = ({ showHint, isHiding }) => {
         {/* Social Links */}
         <div className="flex justify-center gap-4 mb-12 animate-fade-up" style={{ animationDelay: '0.5s' }}>
           {socialLinks.map((social, idx) => (
-            <a
+            
               key={idx}
               href={social.href}
               target={social.href.startsWith('mailto') ? undefined : '_blank'}
