@@ -130,9 +130,9 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
       
       {/* Speech bubble - flapping in light mode */}
       {state === 'flapping' && (
-        <div className="absolute -top-16 -left-24 md:-left-16 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-lg border-2 border-primary z-50">
+        <div className="absolute -top-20 right-0 md:-top-16 md:-left-16 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-xl border-2 border-primary z-[100]">
           <span className="font-medium text-foreground">Let me sleep! 💤</span>
-          <div className="absolute bottom-0 right-4 translate-y-full">
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
             <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-card" />
           </div>
         </div>
@@ -140,9 +140,9 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
       
       {/* Speech bubble - disturbed in dark mode */}
       {state === 'disturbed' && isDarkMode && (
-        <div className="absolute -top-16 -left-24 md:-left-16 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-lg border-2 border-primary z-50">
+        <div className="absolute -top-20 right-0 md:-top-16 md:-left-16 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-xl border-2 border-primary z-[100]">
           <span className="font-medium text-foreground">I'll be back! 🦉</span>
-          <div className="absolute bottom-0 right-4 translate-y-full">
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
             <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-card" />
           </div>
         </div>

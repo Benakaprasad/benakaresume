@@ -13,7 +13,7 @@ const SkillsPage = () => {
     {
       title: 'Database',
       icon: '🗄️',
-      skills: ['MongoDB', 'MySQL', 'Database Design'],
+      skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'Database Design'],
     },
     {
       title: 'Tools & Others',

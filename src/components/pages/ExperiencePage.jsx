@@ -1,10 +1,10 @@
 const ExperiencePage = () => {
   const projects = [
     {
-      title: 'Vaccination Booking System',
-      description: 'A full-stack web application for managing vaccination appointments with user authentication and admin dashboard.',
+      title: 'Child Vaccination & Reminder Management System',
+      description: 'A full-stack web application to help parents track and manage their child\'s vaccination schedules with automated reminders through multiple channels.',
       tech: ['MongoDB', 'Express.js', 'React', 'Node.js'],
-      highlights: ['User registration and authentication', 'Appointment scheduling', 'Admin panel for management'],
+      highlights: ['In-app push notifications for vaccination reminders', 'Email and SMS reminder integration', 'User registration and authentication', 'Admin panel for vaccine management'],
     },
     {
       title: 'Real-Time Bingo Game',
