@@ -197,6 +197,18 @@
     animation: scaleIn 0.4s ease-out forwards;
   }
 
+  .animate-hatch {
+    animation: hatch 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .animate-baby-fly {
+    animation: babyFly 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-egg-crack {
+    animation: eggCrack 1s ease-in-out;
+  }
+  
   /* Scroll animations */
   .scroll-section {
     opacity: 0;
@@ -344,4 +356,61 @@
 
 .animate-drop {
   animation: drop 0.8s ease-in forwards;
+}
+
+@keyframes hatch {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes babyFly {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  20% {
+    transform: translate(20vw, -10vh) rotate(15deg);
+  }
+  40% {
+    transform: translate(40vw, -5vh) rotate(-10deg);
+  }
+  60% {
+    transform: translate(55vw, -12vh) rotate(8deg);
+  }
+  80% {
+    transform: translate(65vw, -8vh) rotate(-5deg);
+  }
+  100% {
+    transform: translate(calc(100vw - 280px), 0) rotate(0deg);
+  }
+}
+
+@keyframes eggCrack {
+  0%, 20% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  30% {
+    transform: rotate(5deg);
+  }
+  35% {
+    transform: rotate(-5deg);
+  }
+  40% {
+    transform: rotate(5deg);
+  }
+  45%, 100% {
+    transform: rotate(0deg);
+  }
 }
