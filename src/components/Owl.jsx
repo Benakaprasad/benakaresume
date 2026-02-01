@@ -102,32 +102,32 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
         </div>
       )}
 
-      <svg width="100" height="130" viewBox="0 0 120 150" className="drop-shadow-lg w-20 h-26 md:w-[100px] md:h-[130px]">
-        {/* Branch */}
-        {/* Branch - Extended to hold both parent and baby */}
-        {(stage === 'landing' || stage === 'resume') && state !== 'flying' && state !== 'flyingAway' && (
-          <g>
-            {/* Main extended branch */}
-            <path 
-              d="M -20 135 Q 20 130 60 135 Q 100 140 140 132" 
-              fill="none" 
-              stroke="hsl(25, 50%, 28%)" 
-              strokeWidth="8"
-              strokeLinecap="round"
-            />
-            <path 
-              d="M -20 135 Q 20 128 60 133 Q 100 138 140 130" 
-              fill="none" 
-              stroke="hsl(25, 40%, 35%)" 
-              strokeWidth="4"
-              strokeLinecap="round"
-            />
-            {/* Leaves on extended branch */}
-            <ellipse cx="10" cy="128" rx="8" ry="4" fill="hsl(140, 40%, 35%)" transform="rotate(-20, 10, 128)" />
-            <ellipse cx="120" cy="125" rx="8" ry="4" fill="hsl(140, 40%, 35%)" transform="rotate(15, 120, 125)" />
-            <ellipse cx="50" cy="130" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(5, 50, 130)" />
-          </g>
-        )}
+      <svg width="100" height="130" viewBox="0 0 200 150" className="drop-shadow-lg w-20 h-26 md:w-[100px] md:h-[130px]">
+      {/* Branch - Extended to hold both parent and baby */}
+      {(stage === 'landing' || stage === 'resume') && state !== 'flying' && state !== 'flyingAway' && (
+        <g>
+          {/* Main extended branch - much longer */}
+          <path 
+            d="M -40 135 Q 30 130 80 135 Q 130 140 200 132" 
+            fill="none" 
+            stroke="hsl(25, 50%, 28%)" 
+            strokeWidth="8"
+            strokeLinecap="round"
+          />
+          <path 
+            d="M -40 135 Q 30 128 80 133 Q 130 138 200 130" 
+            fill="none" 
+            stroke="hsl(25, 40%, 35%)" 
+            strokeWidth="4"
+            strokeLinecap="round"
+          />
+          {/* Leaves on extended branch */}
+          <ellipse cx="0" cy="128" rx="8" ry="4" fill="hsl(140, 40%, 35%)" transform="rotate(-20, 0, 128)" />
+          <ellipse cx="160" cy="125" rx="8" ry="4" fill="hsl(140, 40%, 35%)" transform="rotate(15, 160, 125)" />
+          <ellipse cx="70" cy="130" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(5, 70, 130)" />
+          <ellipse cx="110" cy="132" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(-8, 110, 132)" />
+        </g>
+      )}
         
         {/* Owl Body */}
         <ellipse cx="60" cy="85" rx="38" ry="48" fill="hsl(25, 25%, 42%)" />
