@@ -34,6 +34,7 @@ const Index = () => {
   // Baby owl states
   const [babyOwlStage, setBabyOwlStage] = useState('egg'); // 'egg', 'hatching', 'flying', 'landed'
   const [isEggHatched, setIsEggHatched] = useState(false);
+  const [isEggCracking, setIsEggCracking] = useState(false); // Add this line
 
   // Check localStorage for hatched state on mount
   useEffect(() => {
