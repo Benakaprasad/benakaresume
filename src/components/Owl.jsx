@@ -130,21 +130,61 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
       
       {/* Speech bubble - flapping in light mode */}
       {state === 'flapping' && (
-        <div className="absolute -top-20 right-0 md:-top-16 md:-left-16 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-xl border-2 border-primary z-[100]">
-          <span className="font-medium text-foreground">Let me sleep! 💤</span>
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
-            <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-card" />
-          </div>
+        <div 
+          className="absolute px-4 py-3 rounded-xl text-sm whitespace-nowrap shadow-2xl"
+          style={{
+            top: '-80px',
+            left: '0px',
+            zIndex: 999999,
+            backgroundColor: 'white',
+            color: 'black',
+            border: '3px solid #3b82f6',
+            minWidth: '160px'
+          }}
+        >
+          <span className="font-bold text-base">Let me sleep! 💤</span>
+          <div 
+            className="absolute left-1/2"
+            style={{
+              bottom: '-10px',
+              transform: 'translateX(-50%)',
+              width: 0,
+              height: 0,
+              borderLeft: '10px solid transparent',
+              borderRight: '10px solid transparent',
+              borderTop: '10px solid white'
+            }}
+          />
         </div>
       )}
       
       {/* Speech bubble - disturbed in dark mode */}
       {state === 'disturbed' && isDarkMode && (
-        <div className="absolute -top-20 right-0 md:-top-16 md:-left-16 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-xl border-2 border-primary z-[100]">
-          <span className="font-medium text-foreground">I'll be back! 🦉</span>
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
-            <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-card" />
-          </div>
+        <div 
+          className="absolute px-4 py-3 rounded-xl text-sm whitespace-nowrap shadow-2xl"
+          style={{
+            top: '-80px',
+            left: '0px',
+            zIndex: 999999,
+            backgroundColor: 'white',
+            color: 'black',
+            border: '3px solid #3b82f6',
+            minWidth: '160px'
+          }}
+        >
+          <span className="font-bold text-base">I'll be back! 🦉</span>
+          <div 
+            className="absolute left-1/2"
+            style={{
+              bottom: '-10px',
+              transform: 'translateX(-50%)',
+              width: 0,
+              height: 0,
+              borderLeft: '10px solid transparent',
+              borderRight: '10px solid transparent',
+              borderTop: '10px solid white'
+            }}
+          />
         </div>
       )}
     </div>
