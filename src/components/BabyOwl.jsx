@@ -135,11 +135,12 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode }) => {
           <path d="M 25 32 L 22 22 L 28 28 Z" fill="hsl(25, 30%, 50%)" />
           <path d="M 55 32 L 58 22 L 52 28 Z" fill="hsl(25, 30%, 50%)" />
           
-          {/* Tiny feet - only when not flying */}
-          {!isFlying && (
+          {/* Tiny feet - gripping the branch */}
+          {!isFlying && stage === 'landed' && (
             <g>
-              <path d="M 34 82 L 31 87 M 34 82 L 34 87 M 34 82 L 37 87" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
-              <path d="M 46 82 L 43 87 M 46 82 L 46 87 M 46 82 L 49 87" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
+              {/* Baby owl's feet on parent's branch */}
+              <path d="M 34 82 L 31 90 M 34 82 L 34 90 M 34 82 L 37 90" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
+              <path d="M 46 82 L 43 90 M 46 82 L 46 90 M 46 82 L 49 90" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
             </g>
           )}
           
