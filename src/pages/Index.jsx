@@ -89,41 +89,55 @@ const Index = () => {
   }, [stage]);
 
   const handleOwlClick = useCallback(() => {
-    if (stage === 'landing') {
-      setShowHint(false);
-      setIsLandingHiding(true);
-      setOwlState('waking');
+  if (stage === 'landing') {
+    setShowHint(false);
+    setIsLandingHiding(true);
+    setOwlState('waking');
+    
+    setTimeout(() => {
+      setOwlState('flying');
+      setShowMail(true);
       
       setTimeout(() => {
-        setOwlState('flying');
-        setShowMail(true);
+        setStage('resume');
+        setShowMail(false);
+        setOwlState(darkMode ? 'sitting' : 'sleeping');
+      }, 2500);
+    }, 600);
+  } else if (stage === 'resume') {
+    if (darkMode) {
+      setOwlState('disturbed');
+      setTimeout(() => {
+        setOwlState('flyingAway');
+        // Baby owl follows after 800ms delay
+        setTimeout(() => {
+          setBabyOwlStage('followingParent');
+        }, 800);
         
         setTimeout(() => {
-          setStage('resume');
-          setShowMail(false);
-          setOwlState(darkMode ? 'sitting' : 'sleeping');
-        }, 2500);
-      }, 600);
-    } else if (stage === 'resume') {
-      if (darkMode) {
-        setOwlState('disturbed');
-        setTimeout(() => {
-          setOwlState('flyingAway');
+          setOwlState('returning');
+          // Baby owl returns after 600ms delay
           setTimeout(() => {
-            setOwlState('returning');
+            setBabyOwlStage('returningWithParent');
+          }, 600);
+          
+          setTimeout(() => {
+            setOwlState('sitting');
+            // Baby owl lands after parent
             setTimeout(() => {
-              setOwlState('sitting');
-            }, 1000);
-          }, 20000);
-        }, 1000);
-      } else {
-        setOwlState('flapping');
-        setTimeout(() => {
-          setOwlState('sleeping');
-        }, 3000);
-      }
+              setBabyOwlStage('landed');
+            }, 400);
+          }, 1000);
+        }, 20000);
+      }, 1000);
+    } else {
+      setOwlState('flapping');
+      setTimeout(() => {
+        setOwlState('sleeping');
+      }, 3000);
     }
-  }, [stage, darkMode]);
+  }
+}, [stage, darkMode]);
 
   // Handle egg click - hatch the baby owl
   const handleEggClick = useCallback(() => {
