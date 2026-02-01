@@ -27,7 +27,82 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
       className={`fixed ${getPositionClasses()} ${getAnimationClass()} cursor-pointer z-50 transition-all duration-500`}
       onClick={onClick}
       title={isAsleep ? "Zzz... Click to wake me!" : "Hoot hoot!"}
+      style={{ position: 'fixed' }}
     >
+      {/* Speech bubble - flapping in light mode - MOVED OUTSIDE AND ABOVE SVG */}
+      {state === 'flapping' && (
+        <div 
+          style={{
+            position: 'absolute',
+            top: '-90px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 9999999,
+            backgroundColor: 'white',
+            color: 'black',
+            border: '3px solid #3b82f6',
+            borderRadius: '12px',
+            padding: '12px 16px',
+            minWidth: '180px',
+            boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
+            whiteSpace: 'nowrap',
+            pointerEvents: 'none'
+          }}
+        >
+          <span style={{ fontWeight: 'bold', fontSize: '16px' }}>Let me sleep! 💤</span>
+          <div 
+            style={{
+              position: 'absolute',
+              bottom: '-12px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: 0,
+              height: 0,
+              borderLeft: '12px solid transparent',
+              borderRight: '12px solid transparent',
+              borderTop: '12px solid white'
+            }}
+          />
+        </div>
+      )}
+      
+      {/* Speech bubble - disturbed in dark mode - MOVED OUTSIDE AND ABOVE SVG */}
+      {state === 'disturbed' && isDarkMode && (
+        <div 
+          style={{
+            position: 'absolute',
+            top: '-90px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 9999999,
+            backgroundColor: 'white',
+            color: 'black',
+            border: '3px solid #3b82f6',
+            borderRadius: '12px',
+            padding: '12px 16px',
+            minWidth: '180px',
+            boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
+            whiteSpace: 'nowrap',
+            pointerEvents: 'none'
+          }}
+        >
+          <span style={{ fontWeight: 'bold', fontSize: '16px' }}>I'll be back! 🦉</span>
+          <div 
+            style={{
+              position: 'absolute',
+              bottom: '-12px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: 0,
+              height: 0,
+              borderLeft: '12px solid transparent',
+              borderRight: '12px solid transparent',
+              borderTop: '12px solid white'
+            }}
+          />
+        </div>
+      )}
+
       <svg width="100" height="130" viewBox="0 0 120 150" className="drop-shadow-lg w-20 h-26 md:w-[100px] md:h-[130px]">
         {/* Branch */}
         {(stage === 'landing' || stage === 'resume') && state !== 'flying' && state !== 'flyingAway' && (
@@ -127,66 +202,6 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
           </g>
         )}
       </svg>
-      
-      {/* Speech bubble - flapping in light mode */}
-      {state === 'flapping' && (
-        <div 
-          className="absolute px-4 py-3 rounded-xl text-sm whitespace-nowrap shadow-2xl"
-          style={{
-            top: '-80px',
-            left: '0px',
-            zIndex: 999999,
-            backgroundColor: 'white',
-            color: 'black',
-            border: '3px solid #3b82f6',
-            minWidth: '160px'
-          }}
-        >
-          <span className="font-bold text-base">Let me sleep! 💤</span>
-          <div 
-            className="absolute left-1/2"
-            style={{
-              bottom: '-10px',
-              transform: 'translateX(-50%)',
-              width: 0,
-              height: 0,
-              borderLeft: '10px solid transparent',
-              borderRight: '10px solid transparent',
-              borderTop: '10px solid white'
-            }}
-          />
-        </div>
-      )}
-      
-      {/* Speech bubble - disturbed in dark mode */}
-      {state === 'disturbed' && isDarkMode && (
-        <div 
-          className="absolute px-4 py-3 rounded-xl text-sm whitespace-nowrap shadow-2xl"
-          style={{
-            top: '-80px',
-            left: '0px',
-            zIndex: 999999,
-            backgroundColor: 'white',
-            color: 'black',
-            border: '3px solid #3b82f6',
-            minWidth: '160px'
-          }}
-        >
-          <span className="font-bold text-base">I'll be back! 🦉</span>
-          <div 
-            className="absolute left-1/2"
-            style={{
-              bottom: '-10px',
-              transform: 'translateX(-50%)',
-              width: 0,
-              height: 0,
-              borderLeft: '10px solid transparent',
-              borderRight: '10px solid transparent',
-              borderTop: '10px solid white'
-            }}
-          />
-        </div>
-      )}
     </div>
   );
 };
