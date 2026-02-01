@@ -208,6 +208,14 @@
   .animate-egg-crack {
     animation: eggCrack 1s ease-in-out;
   }
+
+  .animate-baby-fly-away {
+    animation: babyFlyAway 1s ease-in forwards;
+  }
+
+  .animate-baby-return {
+    animation: babyReturn 1s ease-out forwards;
+  }
   
   /* Scroll animations */
   .scroll-section {
@@ -412,5 +420,26 @@
   }
   45%, 100% {
     transform: rotate(0deg);
+  }
+}
+@keyframes babyFlyAway {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100vw, -50vh) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes babyReturn {
+  0% {
+    transform: translate(-100vw, -50vh) rotate(-20deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
   }
 }
