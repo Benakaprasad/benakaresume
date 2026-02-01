@@ -5,15 +5,15 @@ const getPositionClasses = () => {
   
   // Follow parent owl when it flies away - positioned to right of parent
   if (stage === 'followingParent') {
-    return 'top-4 right-24 md:top-8 md:right-32';
+    return 'top-4 right-28 md:top-8 md:right-36';
   }
   if (stage === 'returningWithParent') {
-    return 'top-4 right-24 md:top-8 md:right-32';
+    return 'top-4 right-28 md:top-8 md:right-36';
   }
   
   // Normal sitting position - to the RIGHT of parent owl on the branch
-  if (stage === 'landed') return 'top-4 right-24 md:top-8 md:right-32';
-  return 'top-4 right-24 md:top-8 md:right-32';
+  if (stage === 'landed') return 'top-4 right-28 md:top-8 md:right-36';
+  return 'top-4 right-28 md:top-8 md:right-36';
 };
 
   const getAnimationClass = () => {
