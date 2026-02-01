@@ -159,6 +159,14 @@ const handleEggClick = useCallback(() => {
   }, 1000); // Give time for crack animation
 }, [isEggHatched, babyOwlStage]);
 
+  const handleSkipAnimation = useCallback(() => {
+  setIsLandingHiding(true);
+  setTimeout(() => {
+    setStage('resume');
+    setOwlState(darkMode ? 'sitting' : 'sleeping');
+  }, 300);
+}, [darkMode]);
+
   // Handle baby owl landing
   const handleBabyOwlLanded = useCallback(() => {
     setBabyOwlStage('landed');
@@ -230,7 +238,14 @@ const handleEggClick = useCallback(() => {
         />
       )}
 
-      {stage === 'landing' && <LandingStage showHint={showHint} isHiding={isLandingHiding} />}
+      // Pass it to LandingStage
+      {stage === 'landing' && (
+        <LandingStage 
+          showHint={showHint} 
+          isHiding={isLandingHiding}
+          onSkipAnimation={handleSkipAnimation}
+        />
+      )}
 
       {stage === 'resume' && (
         <>
