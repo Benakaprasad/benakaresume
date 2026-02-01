@@ -9,6 +9,13 @@ const socialLinks = [
 const LandingStage = ({ showHint, isHiding }) => {
   return (
     <div className={`flex items-center justify-center min-h-screen px-4 transition-all duration-700 ${isHiding ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+      <button
+        onClick={onSkipAnimation}
+        className="fixed top-4 right-4 z-50 px-4 py-2 bg-primary/20 hover:bg-primary/30 text-foreground rounded-lg border border-primary/40 transition-all duration-300 hover:scale-105 animate-fade-up"
+        style={{ animationDelay: '0.6s' }}
+      >
+        Skip Animation →
+      </button>
       <div className="text-center max-w-3xl">
         {/* Greeting */}
         <p className="text-lg md:text-xl text-muted-foreground mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
