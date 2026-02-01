@@ -126,8 +126,8 @@ const SkillsPage = () => {
     },
   ];
 
-  // Duplicate the array twice for seamless infinite loop
-  const duplicatedSkills = [...allSkills, ...allSkills];
+  // Duplicate the array MANY times for truly seamless infinite loop
+  const duplicatedSkills = [...allSkills, ...allSkills, ...allSkills, ...allSkills, ...allSkills];
 
   return (
     <div className="space-y-12 md:space-y-16 overflow-hidden">
@@ -147,7 +147,7 @@ const SkillsPage = () => {
       </div>
 
       {/* Infinite Scrolling Row */}
-      <div className="relative py-12">
+      <div className="relative py-12 overflow-hidden">
         {/* Gradient Overlays */}
         <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
@@ -209,8 +209,9 @@ const SkillsPage = () => {
         /* Scrolling Container */
         .skills-scroll-container {
           display: flex;
-          gap: 2rem;
-          animation: infiniteScroll 40s linear infinite;
+          gap: 3rem;
+          animation: infiniteScroll 50s linear infinite;
+          width: max-content;
         }
 
         .skills-scroll-container:hover {
@@ -319,7 +320,7 @@ const SkillsPage = () => {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(-20%);
           }
         }
 
@@ -338,13 +339,19 @@ const SkillsPage = () => {
         /* Responsive */
         @media (min-width: 768px) {
           .skills-scroll-container {
-            gap: 2rem;
+            gap: 3rem;
           }
 
           .skill-logo-box {
             width: 7rem;
             height: 7rem;
             padding: 1.5rem;
+          }
+        }
+        
+        @media (max-width: 767px) {
+          .skills-scroll-container {
+            gap: 2rem;
           }
         }
       `}</style>
