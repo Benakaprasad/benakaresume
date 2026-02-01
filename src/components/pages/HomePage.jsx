@@ -25,10 +25,9 @@ const HomePage = () => {
           
           {/* Download Resume Button */}
           
-            href="/resume.pdf"
+           <a href="/resume.pdf"
             download="Benaka_Prasad_M_Resume.pdf"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-xl font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
-          >
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-xl font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30">
             <Download size={18} />
             Download Resume
           </a>
