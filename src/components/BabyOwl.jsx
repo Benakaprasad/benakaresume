@@ -11,8 +11,9 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode }) => {
       return 'top-4 right-4 md:top-8 md:right-16';
     }
     
-    if (stage === 'landed') return 'top-8 right-28 md:top-12 md:right-32';
-    return 'top-8 right-28 md:top-12 md:right-32';
+    // Sit to the RIGHT of parent owl (further right)
+    if (stage === 'landed') return 'top-4 right-[-10px] md:top-8 md:right-[-20px]';
+    return 'top-4 right-[-10px] md:top-8 md:right-[-20px]';
   };
 
   const getAnimationClass = () => {
@@ -34,6 +35,9 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode }) => {
   const isFlying = stage === 'flying' || 
                    (stage === 'landed' && (parentOwlState === 'flyingAway' || parentOwlState === 'returning'));
 
+  // Baby owl sleeps in light mode, awake in dark mode (like parent)
+  const isAsleep = !isDarkMode && stage === 'landed' && !isFlying;
+
   // Show speech bubble when following parent (disturbed state)
   const showSpeechBubble = stage === 'landed' && 
                            parentOwlState === 'disturbed' && 
@@ -47,7 +51,7 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode }) => {
           style={{
             position: 'fixed',
             top: '80px',
-            right: '200px',
+            right: '80px',
             zIndex: 9999999,
             backgroundColor: 'white',
             color: 'black',
@@ -112,19 +116,33 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode }) => {
           <circle cx="32" cy="45" r="10" fill="white" stroke="hsl(25, 20%, 30%)" strokeWidth="1.5" />
           <circle cx="48" cy="45" r="10" fill="white" stroke="hsl(25, 20%, 30%)" strokeWidth="1.5" />
           
-          {/* Baby pupils - larger for cute effect */}
-          <circle cx="32" cy="45" r="5" fill="hsl(25, 30%, 15%)" />
-          <circle cx="48" cy="45" r="5" fill="hsl(25, 30%, 15%)" />
-          
-          {/* Eye highlights - sparkly baby eyes */}
-          <circle cx="34" cy="43" r="2" fill="white" />
-          <circle cx="50" cy="43" r="2" fill="white" />
-          
-          {/* Worried eyebrows when following parent */}
-          {(parentOwlState === 'disturbed' || parentOwlState === 'flyingAway') && stage === 'landed' && (
+          {/* Eyes - sleeping or awake */}
+          {isAsleep ? (
             <>
-              <path d="M 25 38 L 38 40" stroke="hsl(25, 30%, 25%)" strokeWidth="2" strokeLinecap="round" />
-              <path d="M 55 38 L 42 40" stroke="hsl(25, 30%, 25%)" strokeWidth="2" strokeLinecap="round" />
+              {/* Closed eyes - sleeping in light mode */}
+              <path d="M 24 45 Q 32 48 40 45" fill="none" stroke="hsl(25, 30%, 20%)" strokeWidth="2" strokeLinecap="round" />
+              <path d="M 40 45 Q 48 48 56 45" fill="none" stroke="hsl(25, 30%, 20%)" strokeWidth="2" strokeLinecap="round" />
+              {/* Z's for sleeping */}
+              <text x="60" y="35" fill="hsl(200, 60%, 50%)" fontSize="10" fontWeight="bold" className="animate-pulse">z</text>
+              <text x="66" y="28" fill="hsl(200, 60%, 50%)" fontSize="8" fontWeight="bold" className="animate-pulse">z</text>
+            </>
+          ) : (
+            <>
+              {/* Open eyes - awake in dark mode */}
+              <circle cx="32" cy="45" r="5" fill="hsl(25, 30%, 15%)" />
+              <circle cx="48" cy="45" r="5" fill="hsl(25, 30%, 15%)" />
+              
+              {/* Eye highlights - sparkly baby eyes */}
+              <circle cx="34" cy="43" r="2" fill="white" />
+              <circle cx="50" cy="43" r="2" fill="white" />
+              
+              {/* Worried eyebrows when following parent */}
+              {(parentOwlState === 'disturbed' || parentOwlState === 'flyingAway') && (
+                <>
+                  <path d="M 25 38 L 38 40" stroke="hsl(25, 30%, 25%)" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M 55 38 L 42 40" stroke="hsl(25, 30%, 25%)" strokeWidth="2" strokeLinecap="round" />
+                </>
+              )}
             </>
           )}
           
