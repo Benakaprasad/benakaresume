@@ -216,6 +216,14 @@
   .animate-baby-return {
     animation: babyReturn 1s ease-out forwards;
   }
+
+  .animate-baby-fly-away-delayed {
+    animation: babyFlyAwayDelayed 1.2s ease-in forwards;
+  }
+
+  .animate-baby-return-delayed {
+    animation: babyReturnDelayed 1.2s ease-out forwards;
+  }
   
   /* Scroll animations */
   .scroll-section {
@@ -440,6 +448,35 @@
   }
   100% {
     transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+}
+@keyframes babyFlyAwayDelayed {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  15% {
+    transform: translate(0, -10px) rotate(0deg) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100vw, -50vh) rotate(20deg) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes babyReturnDelayed {
+  0% {
+    transform: translate(-100vw, -50vh) rotate(-20deg) scale(1);
+    opacity: 0;
+  }
+  85% {
+    transform: translate(0, -10px) rotate(0deg) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
     opacity: 1;
   }
 }
