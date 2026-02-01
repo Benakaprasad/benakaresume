@@ -9,7 +9,7 @@ const pages = [
   { icon: Mail, label: 'Contact' },
 ];
 
-const Navigation = ({ currentPage, onPageChange, babyOwlHatched }) => {
+const Navigation = ({ currentPage, onPageChange, babyOwlHatched, onResetEgg }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handlePageChange = (idx) => {
@@ -17,14 +17,12 @@ const Navigation = ({ currentPage, onPageChange, babyOwlHatched }) => {
     setIsOpen(false);
   };
 
-  // Only show navigation after baby owl has hatched
   if (!babyOwlHatched) {
     return null;
   }
 
   return (
     <nav className="fixed top-20 left-4 z-40 animate-fade-up">
-      {/* Navigation Menu - now always visible after hatching */}
       <div className="flex flex-col gap-2 p-3 rounded-xl glass-card">
         {pages.map((item, idx) => (
           <button
@@ -36,6 +34,17 @@ const Navigation = ({ currentPage, onPageChange, babyOwlHatched }) => {
             <span className="text-sm font-medium">{item.label}</span>
           </button>
         ))}
+        
+        {/* Reset Egg Animation Button */}
+        <div className="mt-2 pt-2 border-t border-primary/20">
+          <button
+            onClick={onResetEgg}
+            className="nav-button text-xs"
+            title="Replay egg hatching animation"
+          >
+            Reset Egg Animation
+          </button>
+        </div>
       </div>
     </nav>
   );
