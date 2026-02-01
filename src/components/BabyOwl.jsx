@@ -5,15 +5,15 @@ const getPositionClasses = () => {
   
   // Follow parent owl when it flies away - positioned to right of parent
   if (stage === 'followingParent') {
-    return 'top-4 right-28 md:top-8 md:right-36';
+   return 'top-20 right-1 md:top-20 md:right-4'; 
   }
   if (stage === 'returningWithParent') {
-    return 'top-4 right-28 md:top-8 md:right-36';
+    return 'top-20 right-1 md:top-20 md:right-4';
   }
   
   // Normal sitting position - to the RIGHT of parent owl on the branch
-  if (stage === 'landed') return 'top-4 right-28 md:top-8 md:right-36';
-  return 'top-4 right-28 md:top-8 md:right-36';
+  if (stage === 'landed') return 'top-20 right-1 md:top-20 md:right-4'; 
+  return 'top-20 right-1 md:top-20 md:right-4';
 };
 
   const getAnimationClass = () => {
@@ -84,7 +84,7 @@ const getPositionClasses = () => {
       )}
 
       <div 
-        className={`fixed ${getPositionClasses()} ${getAnimationClass()} z-50 transition-all duration-1000`}
+        className={`fixed ${getPositionClasses()} ${getAnimationClass()} z-[50] transition-all duration-1000`}
         onAnimationEnd={() => {
           if (stage === 'flying') {
             onLanded();
@@ -155,14 +155,13 @@ const getPositionClasses = () => {
           <path d="M 55 32 L 58 22 L 52 28 Z" fill="hsl(25, 30%, 50%)" />
           
           {/* Tiny feet - gripping the branch */}
-          {!isFlying && stage === 'landed' && (
-            <g>
-              {/* Baby owl's feet on parent's branch */}
-              <path d="M 34 82 L 31 90 M 34 82 L 34 90 M 34 82 L 37 90" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
-              <path d="M 46 82 L 43 90 M 46 82 L 46 90 M 46 82 L 49 90" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
-            </g>
-          )}
-          
+        {(stage === 'landed' || stage === 'followingParent' || stage === 'returningWithParent') && (
+          <g>
+            {/* Baby owl's feet on parent's branch */}
+            <path d="M 34 82 L 31 90 M 34 82 L 34 90 M 34 82 L 37 90" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
+            <path d="M 46 82 L 43 90 M 46 82 L 46 90 M 46 82 L 49 90" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
+          </g>
+        )}
           {/* Cute blush marks */}
           <ellipse cx="22" cy="52" rx="4" ry="2" fill="hsl(0, 60%, 70%)" opacity="0.3" />
           <ellipse cx="58" cy="52" rx="4" ry="2" fill="hsl(0, 60%, 70%)" opacity="0.3" />
