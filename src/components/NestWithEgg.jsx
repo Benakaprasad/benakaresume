@@ -12,58 +12,98 @@ const NestWithEgg = ({ onEggClick, isHatched }) => {
         Click me! 👆
       </div>
 
-      <svg width="80" height="100" viewBox="0 0 80 100" className="drop-shadow-lg">
-        {/* Branch Extension */}
-        <path 
-          d="M 10 85 Q 25 82 40 85 Q 55 88 70 83" 
-          fill="none" 
-          stroke="hsl(25, 50%, 28%)" 
-          strokeWidth="6"
-          strokeLinecap="round"
-        />
-        <path 
-          d="M 10 85 Q 25 80 40 83 Q 55 86 70 81" 
-          fill="none" 
-          stroke="hsl(25, 40%, 35%)" 
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
+      <svg width="100" height="110" viewBox="0 0 100 110" className="drop-shadow-lg">
+        {/* Branch for the nest - proper tree branch */}
+        <g>
+          {/* Main branch */}
+          <path 
+            d="M 0 90 Q 25 87 50 90 Q 75 93 100 88" 
+            fill="none" 
+            stroke="hsl(25, 50%, 28%)" 
+            strokeWidth="7"
+            strokeLinecap="round"
+          />
+          <path 
+            d="M 0 90 Q 25 85 50 88 Q 75 91 100 86" 
+            fill="none" 
+            stroke="hsl(25, 40%, 35%)" 
+            strokeWidth="4"
+            strokeLinecap="round"
+          />
+          
+          {/* Branch texture - small twigs */}
+          <path 
+            d="M 20 87 L 15 80" 
+            stroke="hsl(25, 45%, 32%)" 
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path 
+            d="M 45 88 L 42 82" 
+            stroke="hsl(25, 45%, 32%)" 
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path 
+            d="M 75 89 L 78 83" 
+            stroke="hsl(25, 45%, 32%)" 
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          
+          {/* Leaves on branch */}
+          <ellipse cx="12" cy="83" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(-25, 12, 83)" />
+          <ellipse cx="85" cy="82" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(20, 85, 82)" />
+          <ellipse cx="40" cy="85" rx="6" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(-10, 40, 85)" />
+          
+          {/* Branch knots for detail */}
+          <circle cx="30" cy="88" r="2" fill="hsl(25, 35%, 32%)" opacity="0.6" />
+          <circle cx="65" cy="89" r="1.5" fill="hsl(25, 35%, 32%)" opacity="0.6" />
+        </g>
         
-        {/* Small leaves on branch */}
-        <ellipse cx="15" cy="78" rx="6" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(-20, 15, 78)" />
-        <ellipse cx="60" cy="77" rx="6" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(15, 60, 77)" />
-
         {/* Nest */}
         <g className="group-hover:scale-105 transition-transform origin-center">
-          {/* Nest base - woven twigs */}
-          <ellipse cx="40" cy="75" rx="24" ry="8" fill="hsl(30, 35%, 35%)" />
-          <ellipse cx="40" cy="73" rx="22" ry="7" fill="hsl(30, 40%, 40%)" />
+          {/* Nest shadow on branch */}
+          <ellipse cx="50" cy="88" rx="26" ry="5" fill="hsl(0, 0%, 0%)" opacity="0.15" />
           
-          {/* Nest walls - layered twigs */}
-          <path d="M 18 75 Q 16 65 20 58 L 22 60 Q 19 66 20 75" fill="hsl(30, 35%, 38%)" />
-          <path d="M 62 75 Q 64 65 60 58 L 58 60 Q 61 66 60 75" fill="hsl(30, 35%, 38%)" />
-          <path d="M 24 75 Q 22 68 24 62 L 26 63 Q 24 68 25 75" fill="hsl(30, 40%, 42%)" />
-          <path d="M 56 75 Q 58 68 56 62 L 54 63 Q 56 68 55 75" fill="hsl(30, 40%, 42%)" />
+          {/* Nest base - woven twigs */}
+          <ellipse cx="50" cy="82" rx="26" ry="9" fill="hsl(30, 35%, 35%)" />
+          <ellipse cx="50" cy="80" rx="24" ry="8" fill="hsl(30, 40%, 40%)" />
+          
+          {/* Nest walls - layered twigs with more detail */}
+          <path d="M 26 82 Q 24 72 28 65 L 30 67 Q 27 73 28 82" fill="hsl(30, 35%, 38%)" />
+          <path d="M 74 82 Q 76 72 72 65 L 70 67 Q 73 73 72 82" fill="hsl(30, 35%, 38%)" />
+          <path d="M 32 82 Q 30 75 32 69 L 34 70 Q 32 75 33 82" fill="hsl(30, 40%, 42%)" />
+          <path d="M 68 82 Q 70 75 68 69 L 66 70 Q 68 75 67 82" fill="hsl(30, 40%, 42%)" />
+          
+          {/* Additional nest wall details */}
+          <path d="M 38 82 Q 37 77 38 73 L 39 74 Q 38 77 39 82" fill="hsl(30, 38%, 40%)" />
+          <path d="M 62 82 Q 63 77 62 73 L 61 74 Q 62 77 61 82" fill="hsl(30, 38%, 40%)" />
           
           {/* Nest interior - soft lining */}
-          <ellipse cx="40" cy="68" rx="18" ry="6" fill="hsl(35, 45%, 55%)" />
-          <ellipse cx="40" cy="67" rx="16" ry="5" fill="hsl(35, 50%, 60%)" />
+          <ellipse cx="50" cy="75" rx="20" ry="7" fill="hsl(35, 45%, 55%)" />
+          <ellipse cx="50" cy="74" rx="18" ry="6" fill="hsl(35, 50%, 60%)" />
+          
+          {/* Interior texture - soft material */}
+          <ellipse cx="50" cy="74" rx="16" ry="5" fill="hsl(35, 55%, 65%)" opacity="0.7" />
 
           {/* Egg */}
           <g className="animate-breathe">
             {/* Egg shadow */}
-            <ellipse cx="40" cy="66" rx="11" ry="2" fill="hsl(0, 0%, 0%)" opacity="0.2" />
+            <ellipse cx="50" cy="73" rx="12" ry="2" fill="hsl(0, 0%, 0%)" opacity="0.25" />
             
-            {/* Egg body */}
-            <ellipse cx="40" cy="56" rx="10" ry="13" fill="hsl(35, 30%, 88%)" stroke="hsl(35, 25%, 75%)" strokeWidth="1" />
+            {/* Egg body - slightly larger and more detailed */}
+            <ellipse cx="50" cy="62" rx="11" ry="14" fill="hsl(35, 30%, 88%)" stroke="hsl(35, 25%, 75%)" strokeWidth="1" />
             
             {/* Egg spots/texture */}
-            <ellipse cx="36" cy="52" rx="2" ry="2.5" fill="hsl(30, 25%, 70%)" opacity="0.4" />
-            <ellipse cx="43" cy="55" rx="1.5" ry="2" fill="hsl(30, 25%, 70%)" opacity="0.4" />
-            <ellipse cx="38" cy="59" rx="2" ry="2.5" fill="hsl(30, 25%, 70%)" opacity="0.4" />
+            <ellipse cx="45" cy="58" rx="2" ry="2.5" fill="hsl(30, 25%, 70%)" opacity="0.4" />
+            <ellipse cx="54" cy="61" rx="1.5" ry="2" fill="hsl(30, 25%, 70%)" opacity="0.4" />
+            <ellipse cx="48" cy="66" rx="2" ry="2.5" fill="hsl(30, 25%, 70%)" opacity="0.4" />
+            <ellipse cx="52" cy="59" rx="1.8" ry="2.2" fill="hsl(30, 25%, 70%)" opacity="0.35" />
             
-            {/* Egg highlight */}
-            <ellipse cx="37" cy="50" rx="3" ry="4" fill="white" opacity="0.3" />
+            {/* Egg highlight - makes it look shiny */}
+            <ellipse cx="47" cy="56" rx="3.5" ry="5" fill="white" opacity="0.4" />
+            <ellipse cx="46" cy="55" rx="2" ry="3" fill="white" opacity="0.3" />
           </g>
         </g>
       </svg>
