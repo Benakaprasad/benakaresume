@@ -169,6 +169,10 @@
     animation: float 3s ease-in-out infinite;
   }
 
+  .animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+
   .animate-flap {
     animation: flap 0.3s ease-in-out infinite;
   }
@@ -191,6 +195,29 @@
 
   .animate-scale-in {
     animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  /* Scroll animations */
+  .scroll-section {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-section.slide-left {
+    transform: translateX(-60px);
+  }
+
+  .scroll-section.slide-right {
+    transform: translateX(60px);
+  }
+
+  .scroll-section.slide-up {
+    transform: translateY(60px);
+  }
+
+  .scroll-section.visible {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
   }
 }
 
@@ -218,6 +245,15 @@
   }
   50% {
     transform: translateY(-8px);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
   }
 }
 

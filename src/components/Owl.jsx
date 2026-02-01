@@ -14,7 +14,8 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
       case 'flapping': return 'animate-flap';
       case 'flyingAway': return 'animate-fly-away';
       case 'returning': return 'animate-return';
-      case 'sitting': return 'animate-float';
+      case 'sitting': return 'animate-breathe';
+      case 'sleeping': return 'animate-breathe';
       default: return '';
     }
   };
@@ -127,20 +128,21 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
         )}
       </svg>
       
-      {/* Speech bubble */}
+      {/* Speech bubble - flapping in light mode */}
       {state === 'flapping' && (
-        <div className="absolute -top-14 left-1/2 -translate-x-1/2 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-lg border border-border">
-          <span className="font-medium">Let me sleep! 💤</span>
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
+        <div className="absolute -top-16 -left-24 md:-left-16 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-lg border-2 border-primary z-50">
+          <span className="font-medium text-foreground">Let me sleep! 💤</span>
+          <div className="absolute bottom-0 right-4 translate-y-full">
             <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-card" />
           </div>
         </div>
       )}
       
+      {/* Speech bubble - disturbed in dark mode */}
       {state === 'disturbed' && isDarkMode && (
-        <div className="absolute -top-14 left-1/2 -translate-x-1/2 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-lg border border-border">
-          <span className="font-medium">I'll be back! 🦉</span>
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
+        <div className="absolute -top-16 -left-24 md:-left-16 bg-card text-foreground px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-lg border-2 border-primary z-50">
+          <span className="font-medium text-foreground">I'll be back! 🦉</span>
+          <div className="absolute bottom-0 right-4 translate-y-full">
             <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-card" />
           </div>
         </div>
