@@ -1,20 +1,20 @@
 const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode }) => {
-  const getPositionClasses = () => {
-    if (stage === 'hatching') return 'top-4 left-20 scale-0';
-    if (stage === 'flying') return 'top-4 left-20';
-    
-    // Follow parent owl when it flies away - with delay
-    if (stage === 'followingParent') {
-      return 'top-4 right-[-10px] md:top-8 md:right-[-20px]';
-    }
-    if (stage === 'returningWithParent') {
-      return 'top-4 right-4 md:top-8 md:right-16';
-    }
-    
-    // Normal sitting position
-    if (stage === 'landed') return 'top-4 right-[-10px] md:top-8 md:right-[-20px]';
-    return 'top-4 right-[-10px] md:top-8 md:right-[-20px]';
-  };
+ const getPositionClasses = () => {
+  if (stage === 'hatching') return 'top-4 left-20 scale-0';
+  if (stage === 'flying') return 'top-4 left-20';
+  
+  // Follow parent owl when it flies away - positioned to right of parent
+  if (stage === 'followingParent') {
+    return 'top-4 right-[-70px] md:top-8 md:right-[-90px]';
+  }
+  if (stage === 'returningWithParent') {
+    return 'top-4 right-[-70px] md:top-8 md:right-[-90px]';
+  }
+  
+  // Normal sitting position - to the RIGHT of parent owl on the branch
+  if (stage === 'landed') return 'top-4 right-[-70px] md:top-8 md:right-[-90px]';
+  return 'top-4 right-[-70px] md:top-8 md:right-[-90px]';
+};
 
   const getAnimationClass = () => {
     if (stage === 'hatching') return 'animate-hatch';
