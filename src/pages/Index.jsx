@@ -246,8 +246,7 @@ const handleEggClick = useCallback(() => {
           showMail={false}
         />
       )}
-
-      // Pass it to LandingStage
+      
       {stage === 'landing' && (
         <LandingStage 
           showHint={showHint} 
@@ -258,7 +257,6 @@ const handleEggClick = useCallback(() => {
 
       {stage === 'resume' && (
         <>
-          // Pass it to Navigation
           <Navigation 
             currentPage={activeSection} 
             onPageChange={scrollToSection}
