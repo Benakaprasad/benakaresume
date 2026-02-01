@@ -126,8 +126,8 @@ const SkillsPage = () => {
     },
   ];
 
-  // Duplicate skills for seamless infinite scroll
-  const duplicatedSkills = [...allSkills, ...allSkills, ...allSkills];
+  // Duplicate skills multiple times for seamless infinite scroll
+  const duplicatedSkills = [...allSkills, ...allSkills];
 
   return (
     <div className="space-y-12 md:space-y-16 overflow-hidden">
@@ -210,7 +210,7 @@ const SkillsPage = () => {
         .skills-scroll-container {
           display: flex;
           gap: 2rem;
-          animation: infiniteScroll 45s linear infinite;
+          animation: infiniteScroll 40s linear infinite;
           will-change: transform;
         }
 
@@ -320,7 +320,7 @@ const SkillsPage = () => {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-33.333%);
+            transform: translateX(-50%);
           }
         }
 
