@@ -23,8 +23,8 @@ const AboutPage = () => {
       
       <p className="text-base md:text-lg leading-relaxed text-foreground mb-6">
         I am a passionate developer currently pursuing my Bachelor of Engineering in 
-        Information Science & Engineering at Vidyavardhaka College of Engineering, Mysuru.
-        Expected to graduate in 2026.
+        Information Science & Engineering at Global Academy of Technology, Bengaluru.
+        Expected to graduate in 2027.
       </p>
       
       <div className="space-y-4">
@@ -34,8 +34,8 @@ const AboutPage = () => {
           <h4 className="font-semibold text-primary text-base md:text-lg">
             Bachelor of Engineering - Information Science & Engineering
           </h4>
-          <p className="text-muted-foreground">Vidyavardhaka College of Engineering, Mysuru</p>
-          <p className="text-sm text-muted-foreground">Expected Graduation: 2026</p>
+          <p className="text-muted-foreground">Global Academy of Technology, Bengaluru</p>
+          <p className="text-sm text-muted-foreground">Expected Graduation: 2027</p>
         </div>
       </div>
       
