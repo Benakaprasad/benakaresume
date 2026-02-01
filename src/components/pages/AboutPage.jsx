@@ -1,11 +1,25 @@
+import photo from '@/assets/photo.jpeg';
+
 const AboutPage = () => {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-primary mb-6">
-        About Me
-      </h2>
-      
-      <div className="w-20 h-1 bg-gradient-to-r from-primary to-transparent mb-8" />
+      <div className="flex flex-col sm:flex-row items-start gap-6">
+        <div className="hidden sm:block relative group flex-shrink-0">
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur-md opacity-40 group-hover:opacity-70 transition-opacity duration-500" />
+          <img 
+            src={photo} 
+            alt="Benaka Prasad M"
+            className="relative w-28 h-28 rounded-2xl object-cover border-2 border-primary/30 shadow-lg"
+          />
+        </div>
+        
+        <div>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-primary mb-4">
+            About Me
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-transparent mb-6" />
+        </div>
+      </div>
       
       <p className="text-base md:text-lg leading-relaxed text-foreground mb-6">
         I am a passionate developer currently pursuing my Bachelor of Engineering in 
