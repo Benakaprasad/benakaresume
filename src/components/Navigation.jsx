@@ -9,7 +9,7 @@ const pages = [
   { icon: Mail, label: 'Contact' },
 ];
 
-const Navigation = ({ currentPage, onPageChange }) => {
+const Navigation = ({ currentPage, onPageChange, babyOwlHatched }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handlePageChange = (idx) => {
@@ -17,25 +17,15 @@ const Navigation = ({ currentPage, onPageChange }) => {
     setIsOpen(false);
   };
 
-  return (
-    <nav className="fixed top-4 left-4 z-40">
-      {/* Toggle Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="p-3 rounded-xl glass-card hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-        aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
-      >
-        {isOpen ? <X size={20} /> : <Menu size={20} />}
-      </button>
+  // Only show navigation after baby owl has hatched
+  if (!babyOwlHatched) {
+    return null;
+  }
 
-      {/* Navigation Menu */}
-      <div 
-        className={`absolute top-14 left-0 flex flex-col gap-2 p-3 rounded-xl glass-card transition-all duration-300 origin-top-left ${
-          isOpen 
-            ? 'opacity-100 scale-100 translate-y-0' 
-            : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
-        }`}
-      >
+  return (
+    <nav className="fixed top-20 left-4 z-40 animate-fade-up">
+      {/* Navigation Menu - now always visible after hatching */}
+      <div className="flex flex-col gap-2 p-3 rounded-xl glass-card">
         {pages.map((item, idx) => (
           <button
             key={idx}
