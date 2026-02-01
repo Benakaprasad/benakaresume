@@ -37,7 +37,7 @@ const LandingStage = ({ showHint, isHiding, onSkipAnimation }) => {
         
         <div className="flex justify-center gap-4 mb-12 animate-fade-up" style={{ animationDelay: '0.5s' }}>
           {socialLinks.map((social, idx) => (
-            
+            <a
               key={idx}
               href={social.href}
               target={social.href.startsWith('mailto') ? undefined : '_blank'}
