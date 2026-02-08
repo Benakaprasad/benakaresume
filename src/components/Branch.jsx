@@ -1,37 +1,34 @@
 const Branch = () => {
   return (
-    <div className="fixed top-20 right-0 md:top-20 md:right-0 z-30 pointer-events-none">
-      <svg width="300" height="110" viewBox="0 0 300 110" className="drop-shadow-lg">
+    <div className="fixed top-4 right-4 md:top-8 md:right-16 z-30 pointer-events-none">
+      <svg 
+        width="120" 
+        height="150" 
+        viewBox="0 0 120 150" 
+        className="drop-shadow-lg"
+      >
         <g>
-          {/* Extended branch for both owls */}
+          {/* Main branch - extended for both owls */}
           <path 
-            d="M 0 90 Q 75 87 150 90 Q 225 93 300 88" 
+            d="M -30 135 Q 10 130 60 135 Q 110 140 500 132" 
             fill="none" 
             stroke="hsl(25, 50%, 28%)" 
             strokeWidth="8"
             strokeLinecap="round"
           />
           <path 
-            d="M 0 90 Q 75 85 150 88 Q 225 91 300 86" 
+            d="M -30 135 Q 10 128 60 133 Q 110 138 500 130" 
             fill="none" 
             stroke="hsl(25, 40%, 35%)" 
             strokeWidth="4"
             strokeLinecap="round"
           />
           
-          {/* Small twigs for texture */}
-          <path d="M 50 87 L 45 80" stroke="hsl(25, 45%, 32%)" strokeWidth="2" strokeLinecap="round" />
-          <path d="M 150 88 L 145 82" stroke="hsl(25, 45%, 32%)" strokeWidth="2" strokeLinecap="round" />
-          <path d="M 250 89 L 255 83" stroke="hsl(25, 45%, 32%)" strokeWidth="2" strokeLinecap="round" />
-          
-          {/* Leaves scattered along branch */}
-          <ellipse cx="40" cy="83" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(-25, 40, 83)" />
-          <ellipse cx="260" cy="82" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(20, 260, 82)" />
-          <ellipse cx="140" cy="85" rx="6" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(-10, 140, 85)" />
-          
-          {/* Branch knots */}
-          <circle cx="80" cy="88" r="2" fill="hsl(25, 35%, 32%)" opacity="0.6" />
-          <circle cx="200" cy="89" r="1.5" fill="hsl(25, 35%, 32%)" opacity="0.6" />
+          {/* Leaves on branch */}
+          <ellipse cx="5" cy="128" rx="8" ry="4" fill="hsl(140, 40%, 35%)" transform="rotate(-20, 5, 128)" />
+          <ellipse cx="460" cy="125" rx="8" ry="4" fill="hsl(140, 40%, 35%)" transform="rotate(15, 460, 125)" />
+          <ellipse cx="50" cy="130" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(5, 50, 130)" />
+          <ellipse cx="95" cy="132" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(-8, 95, 132)" />
         </g>
       </svg>
     </div>
