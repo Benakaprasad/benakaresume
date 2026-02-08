@@ -54,12 +54,13 @@ useEffect(() => {
                          owlState === 'flapping' || 
                          owlState === 'disturbed';
   
-  const babyOnBranch = babyOwlStage === 'landed';
+  // Baby needs branch when landed, hatching, or flying to land
+  const babyNeedsBranch = babyOwlStage === 'landed' || 
+                          babyOwlStage === 'hatching' || 
+                          babyOwlStage === 'flying';
   
-  const babyComingToBranch = babyOwlStage === 'hatching' || 
-                             babyOwlStage === 'flying';
-  
-  setShowBranch(parentOnBranch || babyOnBranch || babyComingToBranch);
+  // Show branch if EITHER parent OR baby needs it
+  setShowBranch(parentOnBranch || babyNeedsBranch);
 }, [owlState, babyOwlStage]);
 
   useEffect(() => {
