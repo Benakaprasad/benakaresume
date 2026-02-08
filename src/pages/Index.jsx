@@ -12,6 +12,7 @@ import AboutPage from '@/components/pages/AboutPage.jsx';
 import ExperiencePage from '@/components/pages/ExperiencePage.jsx';
 import SkillsPage from '@/components/pages/SkillsPage.jsx';
 import ContactPage from '@/components/pages/ContactPage.jsx';
+import Branch from '@/components/Branch.jsx';
 
 const PAGES = [
   { component: HomePage, label: 'Home' },
@@ -214,6 +215,10 @@ const handleEggClick = useCallback(() => {
     <div className="min-h-screen bg-background transition-colors duration-500 relative">
       {/* Particle Background */}
       <ParticleBackground isDarkMode={darkMode} />
+
+      {stage === 'resume' && showBranch && (
+      <Branch />
+    )}
       
       {/* Nest with Egg - only show in resume stage if not hatched */}
       {stage === 'resume' && (
@@ -221,7 +226,6 @@ const handleEggClick = useCallback(() => {
           onEggClick={handleEggClick}
           isHatched={isEggHatched}
           isEggCracking={isEggCracking}
-          showBranch={showBranch}
         />
       )}
 
@@ -232,7 +236,6 @@ const handleEggClick = useCallback(() => {
           onLanded={handleBabyOwlLanded}
           parentOwlState={owlState}
           isDarkMode={darkMode}
-          showBranch={showBranch}
         />
       )}
       
