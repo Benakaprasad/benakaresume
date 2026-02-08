@@ -32,9 +32,10 @@ const Index = () => {
   const sectionRefs = useRef([]);
 
   // Baby owl states
-  const [babyOwlStage, setBabyOwlStage] = useState('egg'); // 'egg', 'hatching', 'flying', 'landed'
+  const [babyOwlStage, setBabyOwlStage] = useState('egg'); 
   const [isEggHatched, setIsEggHatched] = useState(false);
-  const [isEggCracking, setIsEggCracking] = useState(false); // Add this line
+  const [isEggCracking, setIsEggCracking] = useState(false); 
+  const [showBranch, setShowBranch] = useState(true);
 
   // Check localStorage for hatched state on mount
   useEffect(() => {
@@ -44,6 +45,14 @@ const Index = () => {
       setBabyOwlStage('landed');
     }
   }, []);
+  
+ useEffect(() => {
+    const parentOnBranch = owlState === 'sitting' || owlState === 'sleeping' || owlState === 'flapping' || owlState === 'disturbed';
+    const babyOnBranch = babyOwlStage === 'landed';
+    
+    // Show branch if ANY owl is on it
+    setShowBranch(parentOnBranch || babyOnBranch);
+  }, [owlState, babyOwlStage]);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowHint(false), 5000);
