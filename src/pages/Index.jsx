@@ -221,6 +221,7 @@ const handleEggClick = useCallback(() => {
           onEggClick={handleEggClick}
           isHatched={isEggHatched}
           isEggCracking={isEggCracking}
+          showBranch={showBranch}
         />
       )}
 
@@ -231,6 +232,7 @@ const handleEggClick = useCallback(() => {
           onLanded={handleBabyOwlLanded}
           parentOwlState={owlState}
           isDarkMode={darkMode}
+          showBranch={showBranch}
         />
       )}
       
