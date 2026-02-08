@@ -47,13 +47,20 @@ const Index = () => {
     }
   }, []);
   
- useEffect(() => {
-    const parentOnBranch = owlState === 'sitting' || owlState === 'sleeping' || owlState === 'flapping' || owlState === 'disturbed';
-    const babyOnBranch = babyOwlStage === 'landed';
-    
-    // Show branch if ANY owl is on it
-    setShowBranch(parentOnBranch || babyOnBranch);
-  }, [owlState, babyOwlStage]);
+useEffect(() => {
+  // Parent is on branch
+  const parentOnBranch = owlState === 'sitting' || 
+                         owlState === 'sleeping' || 
+                         owlState === 'flapping' || 
+                         owlState === 'disturbed';
+  
+  const babyOnBranch = babyOwlStage === 'landed';
+  
+  const babyComingToBranch = babyOwlStage === 'hatching' || 
+                             babyOwlStage === 'flying';
+  
+  setShowBranch(parentOnBranch || babyOnBranch || babyComingToBranch);
+}, [owlState, babyOwlStage]);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowHint(false), 5000);
