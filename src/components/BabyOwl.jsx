@@ -1,20 +1,20 @@
-const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode }) => {
-const getPositionClasses = () => {
-  if (stage === 'hatching') return 'top-4 left-20 scale-0';
-  if (stage === 'flying') return 'top-4 left-20';
-  
-  // Follow parent owl when it flies away - positioned to right of parent
-  if (stage === 'followingParent') {
-   return 'top-20 right-1 md:top-20 md:right-4'; 
-  }
-  if (stage === 'returningWithParent') {
+const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode, showBranch }) => {
+  const getPositionClasses = () => {
+    if (stage === 'hatching') return 'top-4 left-20 scale-0';
+    if (stage === 'flying') return 'top-4 left-20';
+    
+    // Follow parent owl when it flies away - positioned to right of parent
+    if (stage === 'followingParent') {
+     return 'top-20 right-1 md:top-20 md:right-4'; 
+    }
+    if (stage === 'returningWithParent') {
+      return 'top-20 right-1 md:top-20 md:right-4';
+    }
+    
+    // Normal sitting position - to the RIGHT of parent owl on the branch
+    if (stage === 'landed') return 'top-20 right-1 md:top-20 md:right-4'; 
     return 'top-20 right-1 md:top-20 md:right-4';
-  }
-  
-  // Normal sitting position - to the RIGHT of parent owl on the branch
-  if (stage === 'landed') return 'top-20 right-1 md:top-20 md:right-4'; 
-  return 'top-20 right-1 md:top-20 md:right-4';
-};
+  };
 
   const getAnimationClass = () => {
     if (stage === 'hatching') return 'animate-hatch';
@@ -92,6 +92,56 @@ const getPositionClasses = () => {
         }}
       >
         <svg width="60" height="80" viewBox="0 0 80 100" className="drop-shadow-lg">
+          {/* ✅ BRANCH - Only show when showBranch is true AND baby is on branch */}
+          {showBranch && (stage === 'landed' || stage === 'followingParent' || stage === 'returningWithParent') && (
+            <g>
+              {/* Main branch - extends wider for baby owl */}
+              <path 
+                d="M -20 90 Q 15 87 50 90 Q 85 93 120 88" 
+                fill="none" 
+                stroke="hsl(25, 50%, 28%)" 
+                strokeWidth="7"
+                strokeLinecap="round"
+              />
+              <path 
+                d="M -20 90 Q 15 85 50 88 Q 85 91 120 86" 
+                fill="none" 
+                stroke="hsl(25, 40%, 35%)" 
+                strokeWidth="4"
+                strokeLinecap="round"
+              />
+              
+              {/* Branch texture - small twigs */}
+              <path 
+                d="M 10 87 L 5 80" 
+                stroke="hsl(25, 45%, 32%)" 
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path 
+                d="M 40 88 L 37 82" 
+                stroke="hsl(25, 45%, 32%)" 
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path 
+                d="M 90 89 L 93 83" 
+                stroke="hsl(25, 45%, 32%)" 
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              
+              {/* Leaves on branch */}
+              <ellipse cx="5" cy="83" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(-25, 5, 83)" />
+              <ellipse cx="100" cy="82" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(20, 100, 82)" />
+              <ellipse cx="35" cy="85" rx="6" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(-10, 35, 85)" />
+              
+              {/* Branch knots for detail */}
+              <circle cx="25" cy="88" r="2" fill="hsl(25, 35%, 32%)" opacity="0.6" />
+              <circle cx="75" cy="89" r="1.5" fill="hsl(25, 35%, 32%)" opacity="0.6" />
+            </g>
+          )}
+          
           {/* Baby Owl Body - smaller and rounder */}
           <ellipse cx="40" cy="55" rx="24" ry="30" fill="hsl(25, 30%, 50%)" />
           
@@ -155,13 +205,13 @@ const getPositionClasses = () => {
           <path d="M 55 32 L 58 22 L 52 28 Z" fill="hsl(25, 30%, 50%)" />
           
           {/* Tiny feet - gripping the branch */}
-        {(stage === 'landed' || stage === 'followingParent' || stage === 'returningWithParent') && (
-          <g>
-            {/* Baby owl's feet on parent's branch */}
-            <path d="M 34 82 L 31 90 M 34 82 L 34 90 M 34 82 L 37 90" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
-            <path d="M 46 82 L 43 90 M 46 82 L 46 90 M 46 82 L 49 90" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
-          </g>
-        )}
+          {(stage === 'landed' || stage === 'followingParent' || stage === 'returningWithParent') && (
+            <g>
+              {/* Baby owl's feet on parent's branch */}
+              <path d="M 34 82 L 31 90 M 34 82 L 34 90 M 34 82 L 37 90" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
+              <path d="M 46 82 L 43 90 M 46 82 L 46 90 M 46 82 L 49 90" stroke="hsl(35, 60%, 45%)" strokeWidth="2" strokeLinecap="round" />
+            </g>
+          )}
           {/* Cute blush marks */}
           <ellipse cx="22" cy="52" rx="4" ry="2" fill="hsl(0, 60%, 70%)" opacity="0.3" />
           <ellipse cx="58" cy="52" rx="4" ry="2" fill="hsl(0, 60%, 70%)" opacity="0.3" />
