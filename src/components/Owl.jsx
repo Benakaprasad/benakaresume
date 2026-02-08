@@ -102,49 +102,6 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
         </div>
       )}
 
-      {/* Extended Branch - Separate SVG to not affect owl size */}
-{stage === 'resume' && state !== 'flying' && state !== 'flyingAway' && (
-  <svg 
-    width="120" 
-    height="150" 
-    viewBox="0 0 120 150" 
-    className="absolute bottom-0 left-6 pointer-events-none"
-    style={{ transform: 'translateY(0)' }}
-  >
-    <path 
-      d="M -30 135 Q 10 130 60 135 Q 110 140 500 132" 
-      fill="none" 
-      stroke="hsl(25, 50%, 28%)" 
-      strokeWidth="8"
-      strokeLinecap="round"
-    />
-    <path 
-      d="M -30 135 Q 10 128 60 133 Q 110 138 500 130" 
-      fill="none" 
-      stroke="hsl(25, 40%, 35%)" 
-      strokeWidth="4"
-      strokeLinecap="round"
-    />
-    <ellipse cx="5" cy="128" rx="8" ry="4" fill="hsl(140, 40%, 35%)" transform="rotate(-20, 5, 128)" />
-    <ellipse cx="460" cy="125" rx="8" ry="4" fill="hsl(140, 40%, 35%)" transform="rotate(15, 460, 125)" />
-    <ellipse cx="50" cy="130" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(5, 50, 130)" />
-    <ellipse cx="95" cy="132" rx="7" ry="3" fill="hsl(140, 40%, 35%)" transform="rotate(-8, 95, 132)" />
-    {/* Baby owl feet on the branch - rendered AFTER branch so they appear on top */}
-    <g transform="translate(650, 45)">
-      <path d="M 34 82 L 31 90 M 34 82 L 34 90 M 34 82 L 37 90" 
-        stroke="hsl(35, 60%, 45%)" 
-        strokeWidth="2" 
-        strokeLinecap="round" 
-      />
-      <path d="M 46 82 L 43 90 M 46 82 L 46 90 M 46 82 L 49 90" 
-        stroke="hsl(35, 60%, 45%)" 
-        strokeWidth="2" 
-        strokeLinecap="round" 
-      />
-    </g>
-  </svg>
-)}
-
 <svg width="100" height="130" viewBox="0 0 120 150" className="drop-shadow-lg w-20 h-26 md:w-[100px] md:h-[130px]">
   {/* Landing page branch only - inside main owl SVG */}
   {stage === 'landing' && state !== 'flying' && state !== 'flyingAway' && (
