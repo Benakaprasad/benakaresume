@@ -110,24 +110,33 @@ const Index = () => {
       setOwlState('disturbed');
       setTimeout(() => {
         setOwlState('flyingAway');
-        // Baby owl follows after 800ms delay
-        setTimeout(() => {
-          setBabyOwlStage('followingParent');
-        }, 800);
+        
+        // ✅ FIX: Only make baby follow if egg is hatched
+        if (isEggHatched) {
+          setTimeout(() => {
+            setBabyOwlStage('followingParent');
+          }, 800);
+        }
         
         setTimeout(() => {
           setOwlState('returning');
-          // Baby owl returns after 600ms delay
-          setTimeout(() => {
-            setBabyOwlStage('returningWithParent');
-          }, 600);
+          
+          // ✅ FIX: Only make baby return if egg is hatched
+          if (isEggHatched) {
+            setTimeout(() => {
+              setBabyOwlStage('returningWithParent');
+            }, 600);
+          }
           
           setTimeout(() => {
             setOwlState('sitting');
-            // Baby owl lands after parent
-            setTimeout(() => {
-              setBabyOwlStage('landed');
-            }, 400);
+            
+            // ✅ FIX: Only make baby land if egg is hatched
+            if (isEggHatched) {
+              setTimeout(() => {
+                setBabyOwlStage('landed');
+              }, 400);
+            }
           }, 1000);
         }, 20000);
       }, 1000);
@@ -138,7 +147,7 @@ const Index = () => {
       }, 3000);
     }
   }
-}, [stage, darkMode]);
+}, [stage, darkMode, isEggHatched]); 
 
   // Handle egg click - hatch the baby owl
 const handleEggClick = useCallback(() => {
