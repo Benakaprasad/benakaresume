@@ -5,15 +5,15 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode}) => {
     
     // Follow parent owl when it flies away - positioned to right of parent
     if (stage === 'followingParent') {
-     return 'top-20 right-1 md:top-20 md:right-4'; 
+     return 'top-20 right-[100px] md:top-20 md:right-[110px]'; 
     }
     if (stage === 'returningWithParent') {
-      return 'top-20 right-1 md:top-20 md:right-4';
+      return 'top-20 right-[100px] md:top-20 md:right-[110px]';
     }
     
     // Normal sitting position - to the RIGHT of parent owl on the branch
-    if (stage === 'landed') return 'top-20 right-1 md:top-20 md:right-4'; 
-    return 'top-20 right-1 md:top-20 md:right-4';
+    if (stage === 'landed') return 'top-20 right-[100px] md:top-20 md:right-[110px]'; 
+    return 'top-20 right-[100px] md:top-20 md:right-[110px]';
   };
 
   const getAnimationClass = () => {
@@ -47,41 +47,41 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode}) => {
   return (
     <>
       {/* Baby owl speech bubble - "Wait for me!" */}
-      {showSpeechBubble && (
-        <div 
-          style={{
-            position: 'fixed',
-            top: '80px',
-            right: '80px',
-            zIndex: 9999999,
-            backgroundColor: 'white',
-            color: 'black',
-            border: '3px solid #f59e0b',
-            borderRadius: '12px',
-            padding: '10px 14px',
-            boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-            whiteSpace: 'nowrap',
-            pointerEvents: 'none',
-            fontSize: '13px',
-            fontWeight: 'bold'
-          }}
-        >
-          Wait for me! 🐣
-          <div 
-            style={{
-              position: 'absolute',
-              top: '50%',
-              right: '-12px',
-              transform: 'translateY(-50%)',
-              width: 0,
-              height: 0,
-              borderTop: '8px solid transparent',
-              borderBottom: '8px solid transparent',
-              borderLeft: '12px solid white'
-            }}
-          />
-        </div>
-      )}
+{showSpeechBubble && (
+  <div 
+    style={{
+      position: 'fixed',
+      top: '90px',
+      right: '-20px',  // ← MOVED RIGHT to point at baby owl instead of mama owl
+      zIndex: 9999999,
+      backgroundColor: 'white',
+      color: 'black',
+      border: '3px solid #f59e0b',
+      borderRadius: '12px',
+      padding: '10px 14px',
+      boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
+      whiteSpace: 'nowrap',
+      pointerEvents: 'none',
+      fontSize: '13px',
+      fontWeight: 'bold'
+    }}
+  >
+    Wait for me! 🐣
+    <div 
+  style={{
+    position: 'absolute',
+    top: '50%',
+    left: '-12px',
+    transform: 'translateY(-50%)',
+    width: 0,
+    height: 0,
+    borderTop: '8px solid transparent',
+    borderBottom: '8px solid transparent',
+    borderRight: '12px solid white'
+  }}
+/>
+  </div>
+)}
 
       <div 
         className={`fixed ${getPositionClasses()} ${getAnimationClass()} z-[50] transition-all duration-1000`}

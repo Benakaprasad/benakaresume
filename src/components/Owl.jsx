@@ -2,9 +2,9 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
   const getPositionClasses = () => {
     if (stage === 'landing') return 'bottom-4 right-4 md:bottom-8 md:right-8';
     if (state === 'flying') return 'bottom-8 right-8';
-    if (state === 'flyingAway') return 'top-4 right-4 md:top-8 md:right-16';
-    if (state === 'returning') return 'top-4 right-4 md:top-8 md:right-16';
-    return 'top-4 right-4 md:top-8 md:right-16';
+    if (state === 'flyingAway') return 'top-4 right-[140px] md:top-8 md:right-[160px]';
+    if (state === 'returning') return 'top-4 right-[140px] md:top-8 md:right-[160px]';
+    return 'top-4 right-[140px] md:top-8 md:right-[160px]';
   };
 
   const getAnimationClass = () => {
@@ -29,78 +29,78 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
       title={isAsleep ? "Zzz... Click to wake me!" : "Hoot hoot!"}
     >
       {/* Speech bubble - flapping in light mode */}
-      {state === 'flapping' && (
-        <div 
-          style={{
-            position: 'fixed',
-            top: '20px',
-            right: '140px',
-            zIndex: 9999999,
-            backgroundColor: 'white',
-            color: 'black',
-            border: '3px solid #3b82f6',
-            borderRadius: '12px',
-            padding: '12px 16px',
-            boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-            whiteSpace: 'nowrap',
-            pointerEvents: 'none',
-            fontSize: '14px',
-            fontWeight: 'bold'
-          }}
-        >
-          Let me sleep! 💤
-          <div 
-            style={{
-              position: 'absolute',
-              top: '50%',
-              right: '-12px',
-              transform: 'translateY(-50%)',
-              width: 0,
-              height: 0,
-              borderTop: '8px solid transparent',
-              borderBottom: '8px solid transparent',
-              borderLeft: '12px solid white'
-            }}
-          />
-        </div>
-      )}
-      
-      {/* Speech bubble - disturbed in dark mode */}
-      {state === 'disturbed' && isDarkMode && (
-        <div 
-          style={{
-            position: 'fixed',
-            top: '20px',
-            right: '140px',
-            zIndex: 9999999,
-            backgroundColor: 'white',
-            color: 'black',
-            border: '3px solid #3b82f6',
-            borderRadius: '12px',
-            padding: '12px 16px',
-            boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-            whiteSpace: 'nowrap',
-            pointerEvents: 'none',
-            fontSize: '14px',
-            fontWeight: 'bold'
-          }}
-        >
-          I'll be back! 🦉
-          <div 
-            style={{
-              position: 'absolute',
-              top: '50%',
-              right: '-12px',
-              transform: 'translateY(-50%)',
-              width: 0,
-              height: 0,
-              borderTop: '8px solid transparent',
-              borderBottom: '8px solid transparent',
-              borderLeft: '12px solid white'
-            }}
-          />
-        </div>
-      )}
+{state === 'flapping' && (
+  <div 
+    style={{
+      position: 'fixed',
+      top: '30px',
+      right: '100px',  // ← Adjusted to be left of mama owl's mouth (MATCHES "I'll be back!" position)
+      zIndex: 9999999,
+      backgroundColor: 'white',
+      color: 'black',
+      border: '3px solid #3b82f6',
+      borderRadius: '12px',
+      padding: '12px 16px',
+      boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
+      whiteSpace: 'nowrap',
+      pointerEvents: 'none',
+      fontSize: '14px',
+      fontWeight: 'bold'
+    }}
+  >
+    Let me sleep! 💤
+    <div 
+      style={{
+        position: 'absolute',
+        top: '50%',
+        right: '-12px',  // Arrow points RIGHT to the owl
+        transform: 'translateY(-50%)',
+        width: 0,
+        height: 0,
+        borderTop: '8px solid transparent',
+        borderBottom: '8px solid transparent',
+        borderLeft: '12px solid white'
+      }}
+    />
+  </div>
+)}
+
+{/* Speech bubble - disturbed in dark mode */}
+{state === 'disturbed' && isDarkMode && (
+  <div 
+    style={{
+      position: 'fixed',
+      top: '60px',
+      right: '240px',  // ← Adjusted to be left of mama owl's mouth
+      zIndex: 9999999,
+      backgroundColor: 'white',
+      color: 'black',
+      border: '3px solid #3b82f6',
+      borderRadius: '12px',
+      padding: '12px 16px',
+      boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
+      whiteSpace: 'nowrap',
+      pointerEvents: 'none',
+      fontSize: '14px',
+      fontWeight: 'bold'
+    }}
+  >
+    I'll be back! 🦉
+    <div 
+      style={{
+        position: 'absolute',
+        top: '50%',
+        right: '-12px',  // Arrow points RIGHT to the owl
+        transform: 'translateY(-50%)',
+        width: 0,
+        height: 0,
+        borderTop: '8px solid transparent',
+        borderBottom: '8px solid transparent',
+        borderLeft: '12px solid white'
+      }}
+    />
+  </div>
+)}
 
 <svg width="100" height="130" viewBox="0 0 120 150" className="drop-shadow-lg w-20 h-26 md:w-[100px] md:h-[130px]">
   {/* Landing page branch only - inside main owl SVG */}
