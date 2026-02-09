@@ -35,7 +35,8 @@ const Index = () => {
   // Baby owl states
   const [babyOwlStage, setBabyOwlStage] = useState('egg'); 
   const [isEggHatched, setIsEggHatched] = useState(false);
-  const [isEggCracking, setIsEggCracking] = useState(false); 
+  const [isEggCracking, setIsEggCracking] = useState(false);
+  const [showBrokenEgg, setShowBrokenEgg] = useState(false);
   const [showBranch, setShowBranch] = useState(true);
 
   const isEggHatchedRef = useRef(isEggHatched);
@@ -49,30 +50,32 @@ const Index = () => {
   useEffect(() => {
     babyOwlStageRef.current = babyOwlStage;
   }, [babyOwlStage]);
+  
   // Check localStorage for hatched state on mount
   useEffect(() => {
     const hatched = localStorage.getItem('babyOwlHatched') === 'true';
     if (hatched) {
       setIsEggHatched(true);
       setBabyOwlStage('landed');
+      setShowBrokenEgg(false); // Don't show broken egg if already hatched
     }
   }, []);
   
-useEffect(() => {
-  // Parent is on branch
-  const parentOnBranch = owlState === 'sitting' || 
-                         owlState === 'sleeping' || 
-                         owlState === 'flapping' || 
-                         owlState === 'disturbed';
-  
-  // Baby needs branch when landed, hatching, or flying to land
-  const babyNeedsBranch = babyOwlStage === 'landed' || 
-                          babyOwlStage === 'hatching' || 
-                          babyOwlStage === 'flying';
-  
-  // Show branch if EITHER parent OR baby needs it
-  setShowBranch(parentOnBranch || babyNeedsBranch);
-}, [owlState, babyOwlStage]);
+  useEffect(() => {
+    // Parent is on branch
+    const parentOnBranch = owlState === 'sitting' || 
+                           owlState === 'sleeping' || 
+                           owlState === 'flapping' || 
+                           owlState === 'disturbed';
+    
+    // Baby needs branch when landed, hatching, or flying to land
+    const babyNeedsBranch = babyOwlStage === 'landed' || 
+                            babyOwlStage === 'hatching' || 
+                            babyOwlStage === 'flying';
+    
+    // Show branch if EITHER parent OR baby needs it
+    setShowBranch(parentOnBranch || babyNeedsBranch);
+  }, [owlState, babyOwlStage]);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowHint(false), 5000);
@@ -119,106 +122,114 @@ useEffect(() => {
   }, [stage]);
 
   const handleOwlClick = useCallback(() => {
-  if (stage === 'landing') {
-    setShowHint(false);
-    setIsLandingHiding(true);
-    setOwlState('waking');
-    
-    setTimeout(() => {
-      setOwlState('flying');
-      setShowMail(true);
+    if (stage === 'landing') {
+      setShowHint(false);
+      setIsLandingHiding(true);
+      setOwlState('waking');
       
       setTimeout(() => {
-        setStage('resume');
-        setShowMail(false);
-        setOwlState(darkMode ? 'sitting' : 'sleeping');
-      }, 2500);
-    }, 600);
-  } else if (stage === 'resume') {
-    if (darkMode) {
-      setOwlState('disturbed');
-      setTimeout(() => {
-        setOwlState('flyingAway');
-        
-        // CHANGED: Use ref to check current value
-        if (isEggHatchedRef.current && babyOwlStageRef.current !== 'egg') {
-          setTimeout(() => {
-            setBabyOwlStage('followingParent');
-          }, 800);
-        }
+        setOwlState('flying');
+        setShowMail(true);
         
         setTimeout(() => {
-          setOwlState('returning');
+          setStage('resume');
+          setShowMail(false);
+          setOwlState(darkMode ? 'sitting' : 'sleeping');
+        }, 2500);
+      }, 600);
+    } else if (stage === 'resume') {
+      if (darkMode) {
+        setOwlState('disturbed');
+        setTimeout(() => {
+          setOwlState('flyingAway');
           
           // CHANGED: Use ref to check current value
           if (isEggHatchedRef.current && babyOwlStageRef.current !== 'egg') {
             setTimeout(() => {
-              setBabyOwlStage('returningWithParent');
-            }, 600);
+              setBabyOwlStage('followingParent');
+            }, 800);
           }
           
           setTimeout(() => {
-            setOwlState('sitting');
+            setOwlState('returning');
             
             // CHANGED: Use ref to check current value
             if (isEggHatchedRef.current && babyOwlStageRef.current !== 'egg') {
               setTimeout(() => {
-                setBabyOwlStage('landed');
-              }, 400);
+                setBabyOwlStage('returningWithParent');
+              }, 600);
             }
-          }, 1000);
-        }, 20000);
-      }, 1000);
-    } else {
-      setOwlState('flapping');
-      setTimeout(() => {
-        setOwlState('sleeping');
-      }, 3000);
+            
+            setTimeout(() => {
+              setOwlState('sitting');
+              
+              // CHANGED: Use ref to check current value
+              if (isEggHatchedRef.current && babyOwlStageRef.current !== 'egg') {
+                setTimeout(() => {
+                  setBabyOwlStage('landed');
+                }, 400);
+              }
+            }, 1000);
+          }, 20000);
+        }, 1000);
+      } else {
+        setOwlState('flapping');
+        setTimeout(() => {
+          setOwlState('sleeping');
+        }, 3000);
+      }
     }
-  }
-}, [stage, darkMode]);
+  }, [stage, darkMode]);
 
   // Handle egg click - hatch the baby owl
-const handleEggClick = useCallback(() => {
-  if (isEggHatched || babyOwlStage !== 'egg') return;
+  const handleEggClick = useCallback(() => {
+    if (isEggHatched || babyOwlStage !== 'egg') return;
 
-  // Start egg cracking animation
-  setIsEggCracking(true);
-  
-  setTimeout(() => {
-    // Egg cracking animation
-    setBabyOwlStage('hatching');
+    // Start egg cracking animation
+    setIsEggCracking(true);
     
+    // After 800ms, stop cracking and show broken egg
     setTimeout(() => {
-      // Baby owl hatches and starts flying
-      setBabyOwlStage('flying');
       setIsEggCracking(false);
+      setShowBrokenEgg(true);
+      setBabyOwlStage('hatching');
+      
+      // After another 800ms, baby owl starts flying
+      setTimeout(() => {
+        setBabyOwlStage('flying');
+      }, 800);
     }, 800);
-  }, 1000); // Give time for crack animation
-}, [isEggHatched, babyOwlStage]);
+  }, [isEggHatched, babyOwlStage]);
 
   const handleSkipAnimation = useCallback(() => {
-  setIsLandingHiding(true);
-  setTimeout(() => {
-    setStage('resume');
-    setOwlState(darkMode ? 'sitting' : 'sleeping');
-  }, 300);
-}, [darkMode]);
+    setIsLandingHiding(true);
+    setTimeout(() => {
+      setStage('resume');
+      setOwlState(darkMode ? 'sitting' : 'sleeping');
+    }, 300);
+  }, [darkMode]);
 
   const handleResetEgg = useCallback(() => {
-  // Clear localStorage
-  localStorage.removeItem('babyOwlHatched');
-  
-  // Reset baby owl states immediately
-  setIsEggHatched(false);
-  setIsEggCracking(false);
-  setBabyOwlStage('egg');
+    // Clear localStorage
+    localStorage.removeItem('babyOwlHatched');
+    
+    // Reset baby owl states immediately
+    setIsEggHatched(false);
+    setIsEggCracking(false);
+    setShowBrokenEgg(false);
+    setBabyOwlStage('egg');
   }, []);
 
   // Handle baby owl landing
   const handleBabyOwlLanded = useCallback(() => {
     setBabyOwlStage('landed');
     setIsEggHatched(true);
+    
+    // Hide broken egg after baby owl lands
+    setTimeout(() => {
+      setShowBrokenEgg(false);
+    }, 500);
+    
     // Save to localStorage so it persists
     localStorage.setItem('babyOwlHatched', 'true');
   }, []);
@@ -246,6 +257,7 @@ const handleEggClick = useCallback(() => {
           onEggClick={handleEggClick}
           isHatched={isEggHatched}
           isEggCracking={isEggCracking}
+          showBrokenEgg={showBrokenEgg}
         />
       )}
 

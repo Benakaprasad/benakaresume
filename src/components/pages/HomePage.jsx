@@ -3,7 +3,7 @@ import photo from '@/assets/photo.jpeg';
 
 const HomePage = () => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 mb-8">
         {/* Photo */}
         <div className="relative group">
@@ -11,7 +11,7 @@ const HomePage = () => {
           <img 
             src={photo} 
             alt="Benaka Prasad M"
-            className="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-card shadow-xl"
+            className="relative w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full object-cover border-4 border-card shadow-xl"
           />
         </div>
         
@@ -24,11 +24,12 @@ const HomePage = () => {
           </p>
           
           {/* Download Resume Button */}
-          
-           <a href="/resume.pdf"
+          <a 
+            href="/resume.pdf"
             download="Benaka_Prasad_M_Resume.pdf"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-xl font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30">
-            <Download size={18} />
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
+          >
+            <Download size={20} />
             Download Resume
           </a>
         </div>
@@ -37,34 +38,26 @@ const HomePage = () => {
       <div className="w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto md:mx-0 mb-8" />
       
       {/* Professional Summary */}
-      <div className="space-y-4">
-        <h3 className="text-xl md:text-2xl font-display font-semibold text-foreground">
+      <div className="space-y-6">
+        <h3 className="text-2xl md:text-3xl font-display font-semibold text-foreground">
           Professional Summary
         </h3>
         
         <p className="text-base md:text-lg leading-relaxed text-foreground">
-          I am a full stack developer with hands-on experience building functional web applications 
-          using JavaScript, Node.js, PostgreSQL, HTML, and CSS. I work comfortably across both frontend 
-          and backend and understand how data flows from the user interface to the database.
+          Full Stack Developer with strong experience in building secure, role-based web applications 
+          using Node.js, Express.js, and PostgreSQL. Designed and implemented REST APIs, authentication 
+          systems, and relational database schemas with constraints and indexing for performance.
         </p>
         
         <p className="text-base md:text-lg leading-relaxed text-foreground">
-          I have built projects involving DOM manipulation, event handling, server-side logic, API 
-          integration, and environment-based configuration. I pay close attention to code structure 
-          and readability and I am comfortable debugging runtime errors, fixing logic issues, and 
-          improving existing implementations.
-        </p>
-        
-        <p className="text-base md:text-lg leading-relaxed text-foreground">
-          I prefer learning through real problem-solving and building complete features rather than 
-          relying only on theory.
+          Hands-on experience integrating frontend interfaces using HTML, CSS, and JavaScript, and 
+          deploying scalable backend systems with a focus on clean architecture and maintainability.
         </p>
       </div>
       
-      <div className="mt-8 p-4 md:p-6 glass-card">
-        <p className="text-sm md:text-base text-muted-foreground flex items-start gap-3">
-          <span className="text-lg flex-shrink-0">💡</span>
-          <span><strong>Tip:</strong> Try clicking on the owl in different modes to see how it reacts! In dark mode, the owl is awake. In light mode, it prefers to sleep.</span>
+      <div className="mt-8 p-5 md:p-6 glass-card border-l-4 border-primary">
+        <p className="text-sm md:text-base text-foreground leading-relaxed">
+          <span className="font-semibold text-primary">💡 Interactive Tip:</span> Try clicking on the owl in different modes! In dark mode, the owl stays awake and alert. In light mode, it prefers to rest peacefully.
         </p>
       </div>
     </div>

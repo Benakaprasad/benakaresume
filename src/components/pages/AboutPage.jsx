@@ -2,7 +2,7 @@ import photo from '@/assets/photo.jpeg';
 
 const AboutPage = () => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex flex-col sm:flex-row items-start gap-6">
         <div className="hidden sm:block relative group flex-shrink-0">
           <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur-md opacity-40 group-hover:opacity-70 transition-opacity duration-500" />
@@ -22,7 +22,7 @@ const AboutPage = () => {
       </div>
       
       {/* Personal Approach to Development */}
-      <div className="space-y-4">
+      <div className="space-y-5">
         <p className="text-base md:text-lg leading-relaxed text-foreground">
           I approach development with a focus on clarity and control. I enjoy building applications 
           from the ground up and understanding how each layer works, from browser interactions to 
@@ -45,55 +45,66 @@ const AboutPage = () => {
       </div>
       
       {/* Education Section */}
-      <div className="space-y-4 mt-8">
-        <h3 className="text-xl md:text-2xl font-display font-semibold text-foreground">Education</h3>
+      <div className="space-y-6 mt-10">
+        <h3 className="text-2xl md:text-3xl font-display font-semibold text-foreground">Education</h3>
         
-        <div className="glass-card p-4 md:p-6">
-          <h4 className="font-semibold text-primary text-base md:text-lg">
-            Bachelor of Engineering - Information Science & Engineering
-          </h4>
-          <p className="text-muted-foreground">Global Academy of Technology, Bangalore</p>
-          <p className="text-sm text-muted-foreground">Expected Graduation: July 2027</p>
-          <p className="text-sm text-primary font-medium mt-1">CGPA: 8.91</p>
-        </div>
-        
-        <div className="glass-card p-4 md:p-6">
-          <h4 className="font-semibold text-primary text-base md:text-lg">
-            Pre-University Education (PU)
-          </h4>
-          <p className="text-muted-foreground">RNS Vidyanikethan Composite PU College, Bangalore</p>
-          <p className="text-sm text-muted-foreground">Completed: September 2023</p>
-          <p className="text-sm text-primary font-medium mt-1">Percentage: 86.17%</p>
-        </div>
-        
-        <div className="glass-card p-4 md:p-6">
-          <h4 className="font-semibold text-primary text-base md:text-lg">
-            ICSE Board
-          </h4>
-          <p className="text-muted-foreground">Bunts Sangha RNS Vidyanikethan, Bangalore</p>
-          <p className="text-sm text-muted-foreground">Completed: October 2021</p>
-          <p className="text-sm text-primary font-medium mt-1">Percentage: 84.13%</p>
+        <div className="space-y-4">
+          <div className="glass-card p-5 md:p-6 border-l-4 border-primary">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+              <h4 className="font-bold text-primary text-base md:text-lg">
+                B.E. - Information Science & Engineering
+              </h4>
+              <span className="text-sm md:text-base font-semibold text-primary">CGPA: 8.73</span>
+            </div>
+            <p className="text-foreground font-medium mb-1">Global Academy of Technology, Bangalore</p>
+            <p className="text-sm text-muted-foreground">Expected Graduation: July 2027</p>
+          </div>
+          
+          <div className="glass-card p-5 md:p-6 border-l-4 border-primary/60">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+              <h4 className="font-bold text-primary text-base md:text-lg">
+                Pre-University Education (State Board)
+              </h4>
+              <span className="text-sm md:text-base font-semibold text-primary">86.17%</span>
+            </div>
+            <p className="text-foreground font-medium mb-1">RNS Vidyanikethan Composite PU College, Bangalore</p>
+            <p className="text-sm text-muted-foreground">Completed: September 2023</p>
+          </div>
+          
+          <div className="glass-card p-5 md:p-6 border-l-4 border-primary/40">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+              <h4 className="font-bold text-primary text-base md:text-lg">
+                ICSE Board
+              </h4>
+              <span className="text-sm md:text-base font-semibold text-primary">84.13%</span>
+            </div>
+            <p className="text-foreground font-medium mb-1">Bunts Sangha RNS Vidyanikethan, Bangalore</p>
+            <p className="text-sm text-muted-foreground">Completed: October 2021</p>
+          </div>
         </div>
       </div>
       
       {/* What Drives Me */}
-      <div className="mt-8 space-y-4">
-        <h3 className="text-xl md:text-2xl font-display font-semibold text-foreground">What Drives Me</h3>
+      <div className="mt-10 space-y-6">
+        <h3 className="text-2xl md:text-3xl font-display font-semibold text-foreground">What Drives Me</h3>
         
-        <ul className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
-            '🚀 Building scalable and efficient web applications',
-            '🎯 Solving complex problems with elegant solutions',
-            '🔍 Deep understanding of how systems work from UI to database',
-            '🐛 Root cause debugging rather than quick fixes',
-            '📚 Continuous learning through building real projects',
-            '🤝 Writing clean, maintainable code that others can understand',
+            'Building scalable and efficient web applications',
+            'Solving complex problems with elegant solutions',
+            'Deep understanding of systems from UI to database',
+            'Root cause debugging rather than quick fixes',
+            'Continuous learning through real projects',
+            'Writing clean, maintainable code for teams',
           ].map((item, idx) => (
-            <li key={idx} className="text-foreground flex items-start gap-2 text-sm md:text-base">
-              {item}
-            </li>
+            <div key={idx} className="glass-card p-4 hover:border-primary/50 transition-colors">
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <p className="text-foreground text-sm md:text-base">{item}</p>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

@@ -1,165 +1,73 @@
 const SkillsPage = () => {
   const skillCategories = [
     {
-      title: 'Frontend',
-      icon: '🎨',
-      skills: ['React.js', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS'],
+      title: 'Programming Languages',
+      skills: ['C', 'Java', 'JavaScript', 'SQL'],
     },
     {
-      title: 'Backend',
-      icon: '⚙️',
-      skills: ['Node.js', 'Express.js', 'REST APIs', 'WebSockets', 'Socket.io'],
+      title: 'Frontend Development',
+      skills: ['HTML5', 'CSS3', 'React.js', 'Responsive Design'],
     },
     {
-      title: 'Database',
-      icon: '🗄️',
-      skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'Database Design'],
+      title: 'Backend Development',
+      skills: ['Node.js', 'Express.js', 'WebSockets', 'REST APIs'],
     },
     {
-      title: 'Tools & Others',
-      icon: '🛠️',
-      skills: ['Git', 'GitHub', 'VS Code', 'Postman', 'npm'],
+      title: 'Databases',
+      skills: ['PostgreSQL', 'MySQL', 'MongoDB'],
+    },
+    {
+      title: 'Tools & Platforms',
+      skills: ['Git', 'GitHub', 'Postman', 'VS Code', 'PyCharm', 'IntelliJ IDEA'],
+    },
+    {
+      title: 'Core Concepts',
+      skills: ['Data Structures & Algorithms', 'Problem Solving', 'Authentication', 'Database Design'],
     },
   ];
 
-  // All skills with working logo URLs
   const allSkills = [
-    {
-      name: 'React.js',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg',
-      color: '#61DAFB'
-    },
-    {
-      name: 'JavaScript',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg',
-      color: '#F7DF1E'
-    },
-    {
-      name: 'HTML5',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg',
-      color: '#E34F26'
-    },
-    {
-      name: 'CSS3',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg',
-      color: '#1572B6'
-    },
-    {
-      name: 'Tailwind CSS',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg',
-      color: '#06B6D4'
-    },
-    {
-      name: 'Node.js',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg',
-      color: '#339933'
-    },
-    {
-      name: 'Express.js',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg',
-      color: '#000000'
-    },
-    {
-      name: 'REST APIs',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postman/postman-original.svg',
-      color: '#FF6C37'
-    },
-    {
-      name: 'Socket.io',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/socketio/socketio-original.svg',
-      color: '#010101'
-    },
-    {
-      name: 'MongoDB',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg',
-      color: '#47A248'
-    },
-    {
-      name: 'MySQL',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg',
-      color: '#4479A1'
-    },
-    {
-      name: 'PostgreSQL',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg',
-      color: '#4169E1'
-    },
-    {
-      name: 'Git',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg',
-      color: '#F05032'
-    },
-    {
-      name: 'GitHub',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg',
-      color: '#181717'
-    },
-    {
-      name: 'VS Code',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg',
-      color: '#007ACC'
-    },
-    {
-      name: 'Postman',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postman/postman-original.svg',
-      color: '#FF6C37'
-    },
-    {
-      name: 'npm',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/npm/npm-original-wordmark.svg',
-      color: '#CB3837'
-    },
-    {
-      name: 'TypeScript',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg',
-      color: '#3178C6'
-    },
-    {
-      name: 'Next.js',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg',
-      color: '#000000'
-    },
-    {
-      name: 'Docker',
-      logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg',
-      color: '#2496ED'
-    },
+    { name: 'JavaScript', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg', color: '#F7DF1E' },
+    { name: 'React.js', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg', color: '#61DAFB' },
+    { name: 'Node.js', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg', color: '#339933' },
+    { name: 'Express.js', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg', color: '#000000' },
+    { name: 'PostgreSQL', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg', color: '#4169E1' },
+    { name: 'MongoDB', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg', color: '#47A248' },
+    { name: 'MySQL', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg', color: '#4479A1' },
+    { name: 'HTML5', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg', color: '#E34F26' },
+    { name: 'CSS3', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg', color: '#1572B6' },
+    { name: 'Java', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg', color: '#007396' },
+    { name: 'C', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg', color: '#A8B9CC' },
+    { name: 'Git', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg', color: '#F05032' },
+    { name: 'GitHub', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg', color: '#181717' },
+    { name: 'VS Code', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg', color: '#007ACC' },
+    { name: 'Postman', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postman/postman-original.svg', color: '#FF6C37' },
+    { name: 'Socket.io', logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/socketio/socketio-original.svg', color: '#010101' },
   ];
 
-  // Duplicate the array MANY times for truly seamless infinite loop
   const duplicatedSkills = [...allSkills, ...allSkills, ...allSkills, ...allSkills, ...allSkills];
 
   return (
-    <div className="space-y-12 md:space-y-16 overflow-hidden">
+    <div className="space-y-10 md:space-y-12 overflow-hidden">
       {/* Header Section */}
-      <div className="text-center">
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-pink-500 mb-4">
-          Tech Stack
+      <div>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-primary mb-4">
+          Technical Skills
         </h2>
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-16 h-1 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full" />
-          <div className="w-24 h-1.5 bg-gradient-to-r from-primary via-purple-500 to-pink-500 rounded-full" />
-          <div className="w-16 h-1 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full" />
-        </div>
-        <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
-          Technologies I work with to build amazing digital experiences
+        <div className="w-20 h-1 bg-gradient-to-r from-primary to-transparent mb-6" />
+        <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+          Technologies and tools I use to build robust, scalable applications
         </p>
       </div>
 
       {/* Infinite Scrolling Row */}
-      <div className="relative py-12 overflow-hidden">
-        {/* Gradient Overlays */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+      <div className="relative py-16 overflow-hidden">
+        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-r from-background to-transparent z-[5] pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-l from-background to-transparent z-[5] pointer-events-none" />
         
-        {/* Scrolling Container */}
         <div className="skills-scroll-container">
           {duplicatedSkills.map((skill, idx) => (
-            <div
-              key={idx}
-              className="skill-item group"
-            >
-              {/* Logo Container */}
+            <div key={idx} className="skill-item group">
               <div className="skill-logo-wrapper">
                 <div className="skill-logo-box">
                   <img
@@ -169,25 +77,12 @@ const SkillsPage = () => {
                     loading="lazy"
                   />
                 </div>
-                
-                {/* Glow Effect */}
-                <div 
-                  className="skill-glow"
-                  style={{ backgroundColor: skill.color }}
-                />
+                <div className="skill-glow" style={{ backgroundColor: skill.color }} />
               </div>
-
-              {/* Tooltip */}
               <div className="skill-tooltip">
-                <div 
-                  className="skill-tooltip-content"
-                  style={{ backgroundColor: skill.color }}
-                >
+                <div className="skill-tooltip-content" style={{ backgroundColor: skill.color }}>
                   {skill.name}
-                  <div 
-                    className="skill-tooltip-arrow"
-                    style={{ backgroundColor: skill.color }}
-                  />
+                  <div className="skill-tooltip-arrow" style={{ backgroundColor: skill.color }} />
                 </div>
               </div>
             </div>
@@ -195,165 +90,118 @@ const SkillsPage = () => {
         </div>
       </div>
 
-      {/* Bottom Section */}
-      <div className="text-center glass-card p-6 md:p-8 max-w-2xl mx-auto">
-        <p className="text-lg md:text-xl font-display font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500 mb-2">
-          Always Learning, Always Growing
-        </p>
-        <p className="text-muted-foreground text-sm md:text-base">
-          Constantly exploring new technologies and improving my craft
-        </p>
+      {/* Skills by Category */}
+      <div className="space-y-5">
+        <h3 className="text-xl md:text-2xl font-display font-semibold text-foreground mb-6">
+          Skills by Category
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {skillCategories.map((category, idx) => (
+            <div key={idx} className="glass-card p-5 hover:border-primary/50 transition-colors">
+              <h4 className="text-base md:text-lg font-semibold text-primary mb-3">
+                {category.title}
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill, skillIdx) => (
+                  <span
+                    key={skillIdx}
+                    className="px-3 py-1.5 text-xs md:text-sm bg-secondary text-foreground rounded-lg border border-border"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Soft Skills */}
+      <div className="glass-card p-6 md:p-8 border-l-4 border-primary">
+        <h3 className="text-xl md:text-2xl font-display font-semibold text-foreground mb-4">
+          Soft Skills
+        </h3>
+        <div className="flex flex-wrap gap-3">
+          {['Communication', 'Adaptability', 'Task Prioritization', 'Teamwork', 'Collaboration'].map((skill, idx) => (
+            <span
+              key={idx}
+              className="px-4 py-2 text-sm md:text-base bg-primary/10 text-primary rounded-xl font-medium border border-primary/20"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Certifications */}
+      <div className="space-y-4">
+        <h3 className="text-xl md:text-2xl font-display font-semibold text-foreground">
+          Certifications
+        </h3>
+        <div className="space-y-3">
+          {[
+            { name: 'Oracle Cloud Infrastructure 2025 Certified Architect Associate (OCI)', date: 'October 2025' },
+            { name: 'Software Engineering Job Simulation — J.P. Morgan Chase & Co.', date: 'September 2025' },
+            { name: 'Unix Shell Scripting — Global Academy of Technology', date: 'April–May 2025' },
+            { name: 'Python Programming & Libraries — Mevi Technologies LLP', date: 'August 2025' },
+            { name: 'Artificial Intelligence Foundations', date: 'April 2024' },
+          ].map((cert, idx) => (
+            <div key={idx} className="glass-card p-4 md:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <p className="text-sm md:text-base text-foreground font-medium">{cert.name}</p>
+              <span className="text-xs md:text-sm text-muted-foreground">{cert.date}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <style jsx>{`
-        /* Scrolling Container */
         .skills-scroll-container {
           display: flex;
-          gap: 3rem;
+          gap: 4rem;
           animation: infiniteScroll 50s linear infinite;
           width: max-content;
         }
-
-        .skills-scroll-container:hover {
-          animation-play-state: paused;
-        }
-
-        /* Skill Item */
-        .skill-item {
-          position: relative;
-          flex-shrink: 0;
-          cursor: pointer;
-        }
-
-        /* Logo Wrapper */
-        .skill-logo-wrapper {
-          position: relative;
-        }
-
-        /* Logo Box */
+        .skills-scroll-container:hover { animation-play-state: paused; }
+        .skill-item { position: relative; flex-shrink: 0; cursor: pointer; }
+        .skill-logo-wrapper { position: relative; }
         .skill-logo-box {
-          width: 5rem;
-          height: 5rem;
-          border-radius: 1rem;
-          background-color: white;
-          padding: 1.25rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          width: 5rem; height: 5rem; border-radius: 1rem;
+          background-color: white; padding: 1.25rem;
+          display: flex; align-items: center; justify-content: center;
           box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
           border: 1px solid rgba(229, 231, 235, 1);
           transition: all 0.3s ease;
         }
-
-        .dark .skill-logo-box {
-          background-color: rgba(31, 41, 55, 1);
-          border-color: rgba(55, 65, 81, 1);
-        }
-
-        .skill-item:hover .skill-logo-box {
-          transform: scale(1.1) translateY(-0.5rem);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        /* Logo Image */
-        .skill-logo-img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-        }
-
-        /* Glow Effect */
+        .dark .skill-logo-box { background-color: rgba(31, 41, 55, 1); border-color: rgba(55, 65, 81, 1); }
+        .skill-item:hover .skill-logo-box { transform: scale(1.1) translateY(-0.5rem); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .skill-logo-img { width: 100%; height: 100%; object-fit: contain; }
         .skill-glow {
-          position: absolute;
-          inset: 0;
-          border-radius: 1rem;
-          filter: blur(1rem);
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          z-index: -10;
+          position: absolute; inset: 0; border-radius: 1rem;
+          filter: blur(1rem); opacity: 0; transition: opacity 0.3s ease; z-index: -10;
         }
-
-        .skill-item:hover .skill-glow {
-          opacity: 0.5;
-        }
-
-        /* Tooltip */
+        .skill-item:hover .skill-glow { opacity: 0.5; }
         .skill-tooltip {
-          position: absolute;
-          bottom: -3.5rem;
-          left: 50%;
-          transform: translateX(-50%);
-          white-space: nowrap;
-          z-index: 20;
-          pointer-events: none;
-          opacity: 0;
-          transition: opacity 0.2s ease;
+          position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+          white-space: nowrap; z-index: 30; pointer-events: none; opacity: 0; transition: opacity 0.2s ease;
+          margin-bottom: 0.75rem;
         }
-
-        .skill-item:hover .skill-tooltip {
-          opacity: 1;
-          animation: tooltipFadeIn 0.2s ease-out forwards;
-        }
-
+        .skill-item:hover .skill-tooltip { opacity: 1; animation: tooltipFadeIn 0.2s ease-out forwards; }
         .skill-tooltip-content {
-          padding: 0.5rem 1rem;
-          border-radius: 0.5rem;
+          padding: 0.5rem 1rem; border-radius: 0.5rem;
           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-          font-weight: 600;
-          font-size: 0.875rem;
-          color: white;
-          position: relative;
+          font-weight: 600; font-size: 0.875rem; color: white; position: relative;
         }
-
         .skill-tooltip-arrow {
-          position: absolute;
-          top: -0.25rem;
-          left: 50%;
-          transform: translateX(-50%) rotate(45deg);
-          width: 0.5rem;
-          height: 0.5rem;
+          position: absolute; bottom: -0.25rem; left: 50%;
+          transform: translateX(-50%) rotate(45deg); width: 0.5rem; height: 0.5rem;
         }
-
-        /* Infinite Scroll Animation */
-        @keyframes infiniteScroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-20%);
-          }
-        }
-
-        /* Tooltip Fade In */
-        @keyframes tooltipFadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(0.313rem);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        /* Responsive */
+        @keyframes infiniteScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-20%); } }
+        @keyframes tooltipFadeIn { from { opacity: 0; transform: translateY(-0.5rem); } to { opacity: 1; transform: translateY(0); } }
         @media (min-width: 768px) {
-          .skills-scroll-container {
-            gap: 3rem;
-          }
-
-          .skill-logo-box {
-            width: 7rem;
-            height: 7rem;
-            padding: 1.5rem;
-          }
+          .skills-scroll-container { gap: 5rem; }
+          .skill-logo-box { width: 7rem; height: 7rem; padding: 1.5rem; }
         }
-        
-        @media (max-width: 767px) {
-          .skills-scroll-container {
-            gap: 2rem;
-          }
-        }
+        @media (max-width: 767px) { .skills-scroll-container { gap: 3rem; } }
       `}</style>
     </div>
   );
