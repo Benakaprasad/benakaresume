@@ -100,6 +100,126 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
   }
+  
+  /* MOBILE: Hide the full tree, show simple branch */
+  @media (max-width: 768px) {
+    /* Hide the main tree component on mobile */
+    [class*="Branch"] {
+      display: none !important;
+    }
+    
+    /* Adjust nest position on mobile */
+    [class*="NestWithEgg"] {
+      top: 3.5rem !important;
+      left: 0.5rem !important;
+    }
+    
+    /* Adjust parent owl position on mobile - under theme toggle */
+    [class*="Owl"]:not([class*="BabyOwl"]) {
+      top: 3.5rem !important;
+      right: 0.5rem !important;
+    }
+    
+    /* Adjust baby owl position on mobile */
+    [class*="BabyOwl"] {
+      top: 3.5rem !important;
+      right: 4.5rem !important;
+    }
+    
+    /* Add simple branch extending from left for mobile */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 3rem;
+      left: -50px;
+      width: 200px;
+      height: 8px;
+      background: linear-gradient(90deg, hsl(25, 50%, 28%) 0%, hsl(25, 45%, 32%) 100%);
+      border-radius: 4px;
+      z-index: 25;
+      pointer-events: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    /* Add simple branch extending from right for mobile (for parent owl) */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 3rem;
+      right: -50px;
+      width: 200px;
+      height: 8px;
+      background: linear-gradient(90deg, hsl(25, 45%, 32%) 0%, hsl(25, 50%, 28%) 100%);
+      border-radius: 4px;
+      z-index: 25;
+      pointer-events: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    /* Fix navigation menu name truncation on mobile */
+    nav h2 {
+      font-size: 0.95rem !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 140px;
+    }
+    
+    /* Navigation menu improvements for mobile */
+    nav {
+      width: 85vw !important;
+      max-width: 320px !important;
+    }
+    
+    /* Ensure reset button is visible without scrolling */
+    nav > div:last-child {
+      position: fixed !important;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: inherit;
+      border-top: 1px solid hsl(var(--border) / 0.3);
+      z-index: 100;
+    }
+    
+    /* Adjust navigation content area to account for fixed footer */
+    nav > div:nth-child(3) {
+      padding-bottom: 150px !important;
+    }
+  }
+  
+  /* DESKTOP: Position owls higher on the tree */
+  @media (min-width: 769px) {
+    /* Move parent owl higher - sitting on top branch */
+    [class*="Owl"]:not([class*="BabyOwl"]) {
+      top: 1rem !important;
+    }
+    
+    /* Move baby owl higher to match parent */
+    [class*="BabyOwl"] {
+      top: 3rem !important;
+    }
+    
+    /* Move nest higher */
+    [class*="NestWithEgg"] {
+      top: 1rem !important;
+    }
+    
+    /* Ensure tree is visible on desktop */
+    [class*="Branch"] {
+      display: block !important;
+    }
+  }
+  
+  /* Smooth page scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Fix section spacing */
+  section {
+    scroll-margin-top: 2rem;
+  }
 }
 
 @layer components {
@@ -226,9 +346,10 @@
   }
   
   .animate-egg-shake {
-  animation: egg-shake 2s ease-in-out infinite;
-  transform-origin: center bottom;
+    animation: egg-shake 2s ease-in-out infinite;
+    transform-origin: center bottom;
   }
+  
   /* Scroll animations */
   .scroll-section {
     opacity: 0;
@@ -434,6 +555,7 @@
     transform: rotate(0deg);
   }
 }
+
 @keyframes babyFlyAway {
   0% {
     transform: translate(0, 0) rotate(0deg);
@@ -455,6 +577,7 @@
     opacity: 1;
   }
 }
+
 @keyframes babyFlyAwayDelayed {
   0% {
     transform: translate(0, 0) rotate(0deg) scale(1);

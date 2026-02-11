@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Home, User, Code, Mail, Award, RotateCcw, LogOut } from 'lucide-react';
+import { Home, User, Code, Mail, Award, RotateCcw } from 'lucide-react';
 import photo from '@/assets/photo.jpeg';
 
 const pages = [
@@ -74,10 +74,10 @@ const Navigation = ({ currentPage, onPageChange, babyOwlHatched, onResetEgg }) =
         {/* Decorative gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 pointer-events-none" />
         
-        {/* Header Section with Profile Photo and Exit Button */}
+        {/* Header Section with Profile Photo */}
         <div className="relative p-8 border-b border-border/20">
           <div className="space-y-3">
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
               {/* Profile Photo and Info */}
               <div className="flex items-center gap-3 min-w-0 flex-1">
                 <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/30 shadow-lg relative group flex-shrink-0">
@@ -90,22 +90,12 @@ const Navigation = ({ currentPage, onPageChange, babyOwlHatched, onResetEgg }) =
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h2 className="text-lg font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent truncate">
+                  <h2 className="text-lg font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
                     Benaka Prasad M
                   </h2>
                   <p className="text-xs text-muted-foreground">Portfolio</p>
                 </div>
               </div>
-
-              {/* Exit Door Button - Aligned to right */}
-              <button
-                onClick={() => setIsOpen(false)}
-                className="w-11 h-11 rounded-xl glass-card hover:bg-red-500/10 transition-all duration-300 flex items-center justify-center group border border-border/50 hover:border-red-500/50 shadow-md hover:shadow-lg flex-shrink-0"
-                aria-label="Close menu"
-                title="Exit menu"
-              >
-                <LogOut className="w-5 h-5 text-foreground group-hover:text-red-500 transition-colors duration-300" />
-              </button>
             </div>
           </div>
         </div>
