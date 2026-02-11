@@ -1,12 +1,4 @@
 const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
-  const getPositionClasses = () => {
-    if (stage === 'landing') return 'bottom-4 right-4 md:bottom-8 md:right-8';
-    if (state === 'flying') return 'bottom-8 right-8';
-    if (state === 'flyingAway') return 'top-4 right-[140px] md:top-8 md:right-[160px]';
-    if (state === 'returning') return 'top-4 right-[140px] md:top-8 md:right-[160px]';
-    return 'top-4 right-[140px] md:top-8 md:right-[160px]';
-  };
-
   const getAnimationClass = () => {
     switch (state) {
       case 'waking': return 'animate-wake';
@@ -22,9 +14,12 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
 
   const isAsleep = state === 'sleeping' || (!isDarkMode && stage === 'resume' && state !== 'flapping' && state !== 'waking');
 
+  // Special positioning for landing stage
+  const positionClass = stage === 'landing' ? 'Owl-landing' : 'Owl';
+
   return (
     <div 
-      className={`fixed ${getPositionClasses()} ${getAnimationClass()} cursor-pointer z-50 transition-all duration-500`}
+      className={`${positionClass} fixed ${getAnimationClass()} cursor-pointer z-50 transition-all duration-500`}
       onClick={onClick}
       title={isAsleep ? "Zzz... Click to wake me!" : "Hoot hoot!"}
     >
@@ -34,7 +29,7 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
     style={{
       position: 'fixed',
       top: '30px',
-      right: '100px',  // ← Adjusted to be left of mama owl's mouth (MATCHES "I'll be back!" position)
+      right: '100px',
       zIndex: 9999999,
       backgroundColor: 'white',
       color: 'black',
@@ -53,7 +48,7 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
       style={{
         position: 'absolute',
         top: '50%',
-        right: '-12px',  // Arrow points RIGHT to the owl
+        right: '-12px',
         transform: 'translateY(-50%)',
         width: 0,
         height: 0,
@@ -71,7 +66,7 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
     style={{
       position: 'fixed',
       top: '60px',
-      right: '240px',  // ← Adjusted to be left of mama owl's mouth
+      right: '240px',
       zIndex: 9999999,
       backgroundColor: 'white',
       color: 'black',
@@ -90,7 +85,7 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
       style={{
         position: 'absolute',
         top: '50%',
-        right: '-12px',  // Arrow points RIGHT to the owl
+        right: '-12px',
         transform: 'translateY(-50%)',
         width: 0,
         height: 0,

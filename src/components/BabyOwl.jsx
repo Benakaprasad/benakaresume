@@ -1,21 +1,4 @@
 const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode}) => {
-  const getPositionClasses = () => {
-    if (stage === 'hatching') return 'top-4 left-20 scale-0';
-    if (stage === 'flying') return 'top-4 left-20';
-    
-    // Follow parent owl when it flies away - positioned to right of parent
-    if (stage === 'followingParent') {
-     return 'top-20 right-[100px] md:top-20 md:right-[110px]'; 
-    }
-    if (stage === 'returningWithParent') {
-      return 'top-20 right-[100px] md:top-20 md:right-[110px]';
-    }
-    
-    // Normal sitting position - to the RIGHT of parent owl on the branch
-    if (stage === 'landed') return 'top-20 right-[100px] md:top-20 md:right-[110px]'; 
-    return 'top-20 right-[100px] md:top-20 md:right-[110px]';
-  };
-
   const getAnimationClass = () => {
     if (stage === 'hatching') return 'animate-hatch';
     if (stage === 'flying') return 'animate-baby-fly';
@@ -44,6 +27,11 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode}) => {
                            parentOwlState === 'disturbed' && 
                            isDarkMode;
 
+  // Dynamic class based on stage
+  let positionClass = 'BabyOwl';
+  if (stage === 'hatching') positionClass = 'BabyOwl-hatching';
+  else if (stage === 'flying') positionClass = 'BabyOwl-flying';
+
   return (
     <>
       {/* Baby owl speech bubble - "Wait for me!" */}
@@ -52,7 +40,7 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode}) => {
     style={{
       position: 'fixed',
       top: '90px',
-      right: '-20px',  // ← MOVED RIGHT to point at baby owl instead of mama owl
+      right: '-20px',
       zIndex: 9999999,
       backgroundColor: 'white',
       color: 'black',
@@ -84,7 +72,7 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode}) => {
 )}
 
       <div 
-        className={`fixed ${getPositionClasses()} ${getAnimationClass()} z-[50] transition-all duration-1000`}
+        className={`${positionClass} fixed ${getAnimationClass()} z-[50] transition-all duration-1000`}
         onAnimationEnd={() => {
           if (stage === 'flying') {
             onLanded();

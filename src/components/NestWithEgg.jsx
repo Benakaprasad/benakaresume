@@ -4,7 +4,7 @@ const NestWithEgg = ({ onEggClick, isHatched, isEggCracking, showBrokenEgg = fal
 
   return (
     <div 
-      className={`fixed top-4 left-20 z-40 ${!isEggCracking && !showBrokenEgg ? 'cursor-pointer' : 'pointer-events-none'} group`}
+      className={`NestWithEgg fixed z-40 ${!isEggCracking && !showBrokenEgg ? 'cursor-pointer' : 'pointer-events-none'} group`}
       onClick={!isEggCracking && !showBrokenEgg ? onEggClick : undefined}
       title={!isEggCracking && !showBrokenEgg ? "Click me! 🥚" : ""}
     >
@@ -195,7 +195,7 @@ const NestWithEgg = ({ onEggClick, isHatched, isEggCracking, showBrokenEgg = fal
         </g>
       </svg>
       
-      <style jsx>{`
+      <style>{`
         @keyframes egg-shake {
           0%, 100% { transform: rotate(0deg); }
           25% { transform: rotate(-3deg); }
