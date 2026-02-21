@@ -35,7 +35,6 @@ const Index = () => {
   const [activeSection, setActiveSection] = useState(0);
   const sectionRefs = useRef([]);
 
-  // Baby owl states
   const [babyOwlStage, setBabyOwlStage] = useState('egg');
   const [isEggHatched, setIsEggHatched] = useState(false);
   const [isEggCracking, setIsEggCracking] = useState(false);
@@ -48,7 +47,6 @@ const Index = () => {
   useEffect(() => { isEggHatchedRef.current = isEggHatched; }, [isEggHatched]);
   useEffect(() => { babyOwlStageRef.current = babyOwlStage; }, [babyOwlStage]);
 
-  // Check localStorage for hatched state on mount — desktop only
   useEffect(() => {
     if (isMobile) return;
     const hatched = localStorage.getItem('babyOwlHatched') === 'true';
@@ -59,18 +57,13 @@ const Index = () => {
     }
   }, [isMobile]);
 
-  // Branch visibility — desktop only
   useEffect(() => {
     if (isMobile) return;
     const parentOnBranch =
-      owlState === 'sitting' ||
-      owlState === 'sleeping' ||
-      owlState === 'flapping' ||
-      owlState === 'disturbed';
+      owlState === 'sitting' || owlState === 'sleeping' ||
+      owlState === 'flapping' || owlState === 'disturbed';
     const babyNeedsBranch =
-      babyOwlStage === 'landed' ||
-      babyOwlStage === 'hatching' ||
-      babyOwlStage === 'flying';
+      babyOwlStage === 'landed' || babyOwlStage === 'hatching' || babyOwlStage === 'flying';
     setShowBranch(parentOnBranch || babyNeedsBranch);
   }, [owlState, babyOwlStage, isMobile]);
 
@@ -87,21 +80,17 @@ const Index = () => {
     }
   }, [darkMode]);
 
-  // Owl state on theme change — desktop only
   useEffect(() => {
     if (isMobile) return;
     if (
       stage === 'resume' &&
-      owlState !== 'disturbed' &&
-      owlState !== 'flapping' &&
-      owlState !== 'flyingAway' &&
-      owlState !== 'returning'
+      owlState !== 'disturbed' && owlState !== 'flapping' &&
+      owlState !== 'flyingAway' && owlState !== 'returning'
     ) {
       setOwlState(darkMode ? 'sitting' : 'sleeping');
     }
   }, [darkMode, stage, isMobile]);
 
-  // Track active section for nav highlighting
   useEffect(() => {
     if (stage !== 'resume') return;
     const observers = sectionRefs.current.map((ref, idx) => {
@@ -120,48 +109,36 @@ const Index = () => {
     return () => { observers.forEach(obs => obs?.disconnect()); };
   }, [stage]);
 
-  // Owl click:
-  // - Landing stage: works identically on ALL devices (full animation)
-  // - Resume stage: desktop only (owl not rendered on mobile in resume)
   const handleOwlClick = useCallback(() => {
     if (stage === 'landing') {
       setShowHint(false);
       setIsLandingHiding(true);
       setOwlState('waking');
-
       setTimeout(() => {
         setOwlState('flying');
         setShowMail(true);
-
         setTimeout(() => {
           setStage('resume');
           setShowMail(false);
           setOwlState(darkMode ? 'sitting' : 'sleeping');
         }, 2500);
       }, 600);
-
     } else if (stage === 'resume') {
-      if (isMobile) return; // owl not shown in resume on mobile, safety guard
-
+      if (isMobile) return;
       if (darkMode) {
         setOwlState('disturbed');
         setTimeout(() => {
           setOwlState('flyingAway');
-
           if (isEggHatchedRef.current && babyOwlStageRef.current !== 'egg') {
             setTimeout(() => { setBabyOwlStage('followingParent'); }, 800);
           }
-
           setTimeout(() => {
             setOwlState('returning');
-
             if (isEggHatchedRef.current && babyOwlStageRef.current !== 'egg') {
               setTimeout(() => { setBabyOwlStage('returningWithParent'); }, 600);
             }
-
             setTimeout(() => {
               setOwlState('sitting');
-
               if (isEggHatchedRef.current && babyOwlStageRef.current !== 'egg') {
                 setTimeout(() => { setBabyOwlStage('landed'); }, 400);
               }
@@ -221,66 +198,78 @@ const Index = () => {
     <div className="min-h-screen bg-background transition-colors duration-500 relative">
       <ParticleBackground isDarkMode={darkMode} />
 
-      {/* ── DESKTOP ONLY in resume stage ── */}
-      {!isMobile && stage === 'resume' && <Branch />}
-
-      {!isMobile && stage === 'resume' && (
-        <NestWithEgg
-          onEggClick={handleEggClick}
-          isHatched={isEggHatched}
-          isEggCracking={isEggCracking}
-          showBrokenEgg={showBrokenEgg}
-        />
-      )}
-
-      {!isMobile && stage === 'resume' && babyOwlStage !== 'egg' && (
-        <BabyOwl
-          stage={babyOwlStage}
-          onLanded={handleBabyOwlLanded}
-          parentOwlState={owlState}
-          isDarkMode={darkMode}
-        />
-      )}
-
       {/*
-        Owl rendering:
-        - Landing stage → show on ALL devices (full animation)
-        - Resume stage  → show on DESKTOP only
+        SCENE WRAPPER — all owl/branch/nest elements scaled together as one unit.
+        This ensures the owl always stays on the branch regardless of the user's zoom level,
+        because they all scale from the same origin point (bottom right).
       */}
-      {(stage === 'landing' || !isMobile) &&
-        (owlState !== 'flyingAway' || stage !== 'resume') &&
-        owlState !== 'returning' && (
-          <Owl
-            state={owlState}
-            isDarkMode={darkMode}
-            stage={stage}
-            onClick={handleOwlClick}
-            showMail={showMail}
-          />
-        )
-      }
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        transformOrigin: 'bottom right',
+        transform: 'scale(0.8)',
+        pointerEvents: 'none',
+        zIndex: 50,
+      }}>
+        <div style={{ pointerEvents: 'auto' }}>
 
-      {!isMobile && owlState === 'flyingAway' && (
-        <Owl
-          state="flyingAway"
-          isDarkMode={darkMode}
-          stage={stage}
-          onClick={() => {}}
-          showMail={false}
-        />
-      )}
+          {!isMobile && stage === 'resume' && <Branch />}
 
-      {!isMobile && owlState === 'returning' && (
-        <Owl
-          state="returning"
-          isDarkMode={darkMode}
-          stage={stage}
-          onClick={() => {}}
-          showMail={false}
-        />
-      )}
+          {!isMobile && stage === 'resume' && (
+            <NestWithEgg
+              onEggClick={handleEggClick}
+              isHatched={isEggHatched}
+              isEggCracking={isEggCracking}
+              showBrokenEgg={showBrokenEgg}
+            />
+          )}
 
-      {/* Landing stage — identical on ALL devices */}
+          {!isMobile && stage === 'resume' && babyOwlStage !== 'egg' && (
+            <BabyOwl
+              stage={babyOwlStage}
+              onLanded={handleBabyOwlLanded}
+              parentOwlState={owlState}
+              isDarkMode={darkMode}
+            />
+          )}
+
+          {(stage === 'landing' || !isMobile) &&
+            (owlState !== 'flyingAway' || stage !== 'resume') &&
+            owlState !== 'returning' && (
+              <Owl
+                state={owlState}
+                isDarkMode={darkMode}
+                stage={stage}
+                onClick={handleOwlClick}
+                showMail={showMail}
+              />
+            )
+          }
+
+          {!isMobile && owlState === 'flyingAway' && (
+            <Owl
+              state="flyingAway"
+              isDarkMode={darkMode}
+              stage={stage}
+              onClick={() => {}}
+              showMail={false}
+            />
+          )}
+
+          {!isMobile && owlState === 'returning' && (
+            <Owl
+              state="returning"
+              isDarkMode={darkMode}
+              stage={stage}
+              onClick={() => {}}
+              showMail={false}
+            />
+          )}
+
+        </div>
+      </div>
+
+      {/* Landing stage */}
       {stage === 'landing' && (
         <LandingStage
           showHint={showHint}
