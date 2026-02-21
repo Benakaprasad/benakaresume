@@ -65,8 +65,8 @@ const Owl = ({ state, isDarkMode, stage, onClick, showMail = false }) => {
   <div 
     style={{
       position: 'fixed',
-      top: '30px',
-      right: '100px',
+      top: '10px',
+      right: '260px',
       zIndex: 9999999,
       backgroundColor: 'white',
       color: 'black',
