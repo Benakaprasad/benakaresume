@@ -42,18 +42,18 @@ const HomePage = () => {
         </h3>
         <div className="space-y-4 font-sans">
           <p className="text-base md:text-lg leading-relaxed text-foreground">
-            Full Stack Developer with hands-on experience across the entire web stack — from designing
+            Full Stack Developer with hands-on experience across the entire web stack from designing
             REST APIs, JWT authentication systems, and relational database schemas in Node.js and
             PostgreSQL, to building interactive frontend interfaces with React.js and modern CSS.
           </p>
           <p className="text-base md:text-lg leading-relaxed text-foreground">
             On the frontend, I build complete user experiences including custom animations,
-            component architecture, responsive layouts, and real-time UI interactions — as demonstrated
+            component architecture, responsive layouts, and real-time UI interactions as demonstrated
             in this portfolio itself. On the backend, I design role-based access systems, integrate
             third-party APIs, and structure databases for reliability and performance.
           </p>
           <p className="text-base md:text-lg leading-relaxed text-foreground">
-            I work across the full request lifecycle — from what the user sees and clicks, to the API
+            I work across the full request lifecycle from what the user sees and clicks, to the API
             that handles it, to the database query that resolves it. My focus is on building systems
             that are predictable, maintainable, and easy for other developers to work with.
           </p>
