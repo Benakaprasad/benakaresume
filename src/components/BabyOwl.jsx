@@ -40,7 +40,7 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode}) => {
             style={{
               position: 'absolute',
               top: '10px',
-              left: '-140px',
+              right: '-140px',
               zIndex: 9999999,
               backgroundColor: 'white',
               color: 'black',
@@ -59,13 +59,13 @@ const BabyOwl = ({ stage, onLanded, parentOwlState, isDarkMode}) => {
               style={{
                 position: 'absolute',
                 top: '50%',
-                right: '-12px',
+                left: '-12px',
                 transform: 'translateY(-50%)',
                 width: 0,
                 height: 0,
                 borderTop: '8px solid transparent',
                 borderBottom: '8px solid transparent',
-                borderLeft: '12px solid white'
+                borderRight: '12px solid white'
               }}
             />
           </div>
