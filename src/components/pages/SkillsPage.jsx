@@ -46,10 +46,11 @@ const SkillsPage = () => {
         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
           Technical Skills
         </h2>
-        <div className="w-16 h-px bg-gradient-to-r from-primary to-transparent mb-6" />
+        <div className="w-16 h-0.5 bg-gradient-to-r from-primary to-transparent mb-6" />
         <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed">
           Technologies and tools I use to build robust, scalable applications
         </p>
+
       </div>
 
       {/* ── INFINITE SCROLL — UNTOUCHED ── */}
