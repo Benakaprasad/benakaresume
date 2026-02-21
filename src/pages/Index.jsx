@@ -13,6 +13,7 @@ import ExperiencePage from '@/components/pages/ExperiencePage.jsx';
 import SkillsPage from '@/components/pages/SkillsPage.jsx';
 import ContactPage from '@/components/pages/ContactPage.jsx';
 import Branch from '@/components/Branch.jsx';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const PAGES = [
   { component: HomePage, label: 'Home' },
@@ -23,6 +24,8 @@ const PAGES = [
 ];
 
 const Index = () => {
+  const isMobile = useIsMobile();
+
   const [stage, setStage] = useState('landing');
   const [darkMode, setDarkMode] = useState(false);
   const [owlState, setOwlState] = useState('sleeping');
@@ -33,7 +36,7 @@ const Index = () => {
   const sectionRefs = useRef([]);
 
   // Baby owl states
-  const [babyOwlStage, setBabyOwlStage] = useState('egg'); 
+  const [babyOwlStage, setBabyOwlStage] = useState('egg');
   const [isEggHatched, setIsEggHatched] = useState(false);
   const [isEggCracking, setIsEggCracking] = useState(false);
   const [showBrokenEgg, setShowBrokenEgg] = useState(false);
@@ -42,40 +45,33 @@ const Index = () => {
   const isEggHatchedRef = useRef(isEggHatched);
   const babyOwlStageRef = useRef(babyOwlStage);
 
-  // Update refs whenever states change
-  useEffect(() => {
-    isEggHatchedRef.current = isEggHatched;
-  }, [isEggHatched]);
+  useEffect(() => { isEggHatchedRef.current = isEggHatched; }, [isEggHatched]);
+  useEffect(() => { babyOwlStageRef.current = babyOwlStage; }, [babyOwlStage]);
 
+  // Check localStorage for hatched state on mount (desktop only)
   useEffect(() => {
-    babyOwlStageRef.current = babyOwlStage;
-  }, [babyOwlStage]);
-  
-  // Check localStorage for hatched state on mount
-  useEffect(() => {
+    if (isMobile) return;
     const hatched = localStorage.getItem('babyOwlHatched') === 'true';
     if (hatched) {
       setIsEggHatched(true);
       setBabyOwlStage('landed');
-      setShowBrokenEgg(false); // Don't show broken egg if already hatched
+      setShowBrokenEgg(false);
     }
-  }, []);
-  
+  }, [isMobile]);
+
   useEffect(() => {
-    // Parent is on branch
-    const parentOnBranch = owlState === 'sitting' || 
-                           owlState === 'sleeping' || 
-                           owlState === 'flapping' || 
-                           owlState === 'disturbed';
-    
-    // Baby needs branch when landed, hatching, or flying to land
-    const babyNeedsBranch = babyOwlStage === 'landed' || 
-                            babyOwlStage === 'hatching' || 
-                            babyOwlStage === 'flying';
-    
-    // Show branch if EITHER parent OR baby needs it
+    if (isMobile) return;
+    const parentOnBranch =
+      owlState === 'sitting' ||
+      owlState === 'sleeping' ||
+      owlState === 'flapping' ||
+      owlState === 'disturbed';
+    const babyNeedsBranch =
+      babyOwlStage === 'landed' ||
+      babyOwlStage === 'hatching' ||
+      babyOwlStage === 'flying';
     setShowBranch(parentOnBranch || babyNeedsBranch);
-  }, [owlState, babyOwlStage]);
+  }, [owlState, babyOwlStage, isMobile]);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowHint(false), 5000);
@@ -91,18 +87,26 @@ const Index = () => {
   }, [darkMode]);
 
   useEffect(() => {
-    if (stage === 'resume' && owlState !== 'disturbed' && owlState !== 'flapping' && owlState !== 'flyingAway' && owlState !== 'returning') {
+    if (isMobile) return;
+    if (
+      stage === 'resume' &&
+      owlState !== 'disturbed' &&
+      owlState !== 'flapping' &&
+      owlState !== 'flyingAway' &&
+      owlState !== 'returning'
+    ) {
       setOwlState(darkMode ? 'sitting' : 'sleeping');
     }
-  }, [darkMode, stage]);
+  }, [darkMode, stage, isMobile]);
 
-  // Track which section is active for navigation highlighting
+
+
+  // Track active section for nav highlighting
   useEffect(() => {
     if (stage !== 'resume') return;
 
     const observers = sectionRefs.current.map((ref, idx) => {
       if (!ref) return null;
-      
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
@@ -111,26 +115,25 @@ const Index = () => {
         },
         { threshold: [0.3, 0.5] }
       );
-      
       observer.observe(ref);
       return observer;
     });
 
-    return () => {
-      observers.forEach(obs => obs?.disconnect());
-    };
+    return () => { observers.forEach(obs => obs?.disconnect()); };
   }, [stage]);
 
   const handleOwlClick = useCallback(() => {
+    if (isMobile) return; // owl is not rendered on mobile, safety guard
+
     if (stage === 'landing') {
       setShowHint(false);
       setIsLandingHiding(true);
       setOwlState('waking');
-      
+
       setTimeout(() => {
         setOwlState('flying');
         setShowMail(true);
-        
+
         setTimeout(() => {
           setStage('resume');
           setShowMail(false);
@@ -142,64 +145,46 @@ const Index = () => {
         setOwlState('disturbed');
         setTimeout(() => {
           setOwlState('flyingAway');
-          
-          // CHANGED: Use ref to check current value
+
           if (isEggHatchedRef.current && babyOwlStageRef.current !== 'egg') {
-            setTimeout(() => {
-              setBabyOwlStage('followingParent');
-            }, 800);
+            setTimeout(() => { setBabyOwlStage('followingParent'); }, 800);
           }
-          
+
           setTimeout(() => {
             setOwlState('returning');
-            
-            // CHANGED: Use ref to check current value
+
             if (isEggHatchedRef.current && babyOwlStageRef.current !== 'egg') {
-              setTimeout(() => {
-                setBabyOwlStage('returningWithParent');
-              }, 600);
+              setTimeout(() => { setBabyOwlStage('returningWithParent'); }, 600);
             }
-            
+
             setTimeout(() => {
               setOwlState('sitting');
-              
-              // CHANGED: Use ref to check current value
+
               if (isEggHatchedRef.current && babyOwlStageRef.current !== 'egg') {
-                setTimeout(() => {
-                  setBabyOwlStage('landed');
-                }, 400);
+                setTimeout(() => { setBabyOwlStage('landed'); }, 400);
               }
             }, 1000);
           }, 20000);
         }, 1000);
       } else {
         setOwlState('flapping');
-        setTimeout(() => {
-          setOwlState('sleeping');
-        }, 3000);
+        setTimeout(() => { setOwlState('sleeping'); }, 3000);
       }
     }
-  }, [stage, darkMode]);
+  }, [stage, darkMode, isMobile]);
 
-  // Handle egg click - hatch the baby owl
   const handleEggClick = useCallback(() => {
+    if (isMobile) return;
     if (isEggHatched || babyOwlStage !== 'egg') return;
 
-    // Start egg cracking animation
     setIsEggCracking(true);
-    
-    // After 800ms, stop cracking and show broken egg
     setTimeout(() => {
       setIsEggCracking(false);
       setShowBrokenEgg(true);
       setBabyOwlStage('hatching');
-      
-      // After another 800ms, baby owl starts flying
-      setTimeout(() => {
-        setBabyOwlStage('flying');
-      }, 800);
+      setTimeout(() => { setBabyOwlStage('flying'); }, 800);
     }, 800);
-  }, [isEggHatched, babyOwlStage]);
+  }, [isEggHatched, babyOwlStage, isMobile]);
 
   const handleSkipAnimation = useCallback(() => {
     setIsLandingHiding(true);
@@ -210,33 +195,22 @@ const Index = () => {
   }, [darkMode]);
 
   const handleResetEgg = useCallback(() => {
-    // Clear localStorage
+    if (isMobile) return;
     localStorage.removeItem('babyOwlHatched');
-    
-    // Reset baby owl states immediately
     setIsEggHatched(false);
     setIsEggCracking(false);
     setShowBrokenEgg(false);
     setBabyOwlStage('egg');
-  }, []);
+  }, [isMobile]);
 
-  // Handle baby owl landing
   const handleBabyOwlLanded = useCallback(() => {
     setBabyOwlStage('landed');
     setIsEggHatched(true);
-    
-    // Hide broken egg after baby owl lands
-    setTimeout(() => {
-      setShowBrokenEgg(false);
-    }, 500);
-    
-    // Save to localStorage so it persists
+    setTimeout(() => { setShowBrokenEgg(false); }, 500);
     localStorage.setItem('babyOwlHatched', 'true');
   }, []);
 
-  const toggleTheme = useCallback(() => {
-    setDarkMode(prev => !prev);
-  }, []);
+  const toggleTheme = useCallback(() => { setDarkMode(prev => !prev); }, []);
 
   const scrollToSection = useCallback((idx) => {
     sectionRefs.current[idx]?.scrollIntoView({ behavior: 'smooth' });
@@ -247,13 +221,11 @@ const Index = () => {
       {/* Particle Background */}
       <ParticleBackground isDarkMode={darkMode} />
 
-      {stage === 'resume' && (
-        <Branch />
-      )}
-      
-      {/* Nest with Egg - only show in resume stage if not hatched */}
-      {stage === 'resume' && (
-        <NestWithEgg 
+      {/* ── DESKTOP ONLY: Branch, Nest, BabyOwl, Owl ── */}
+      {!isMobile && stage === 'resume' && <Branch />}
+
+      {!isMobile && stage === 'resume' && (
+        <NestWithEgg
           onEggClick={handleEggClick}
           isHatched={isEggHatched}
           isEggCracking={isEggCracking}
@@ -261,18 +233,17 @@ const Index = () => {
         />
       )}
 
-      {/* Baby Owl - show after hatching starts */}
-      {stage === 'resume' && babyOwlStage !== 'egg' && (
-        <BabyOwl 
+      {!isMobile && stage === 'resume' && babyOwlStage !== 'egg' && (
+        <BabyOwl
           stage={babyOwlStage}
           onLanded={handleBabyOwlLanded}
           parentOwlState={owlState}
           isDarkMode={darkMode}
         />
       )}
-      
-      {/* Parent Owl - always visible */}
-      {(owlState !== 'flyingAway' || stage !== 'resume') && owlState !== 'returning' && (
+
+      {/* Owl — visible on landing for both mobile & desktop, hidden on resume for mobile */}
+      {!(isMobile && stage === 'resume') && (owlState !== 'flyingAway' || stage !== 'resume') && owlState !== 'returning' && (
         <Owl
           state={owlState}
           isDarkMode={darkMode}
@@ -281,8 +252,8 @@ const Index = () => {
           showMail={showMail}
         />
       )}
-      
-      {owlState === 'flyingAway' && (
+
+      {!isMobile && owlState === 'flyingAway' && (
         <Owl
           state="flyingAway"
           isDarkMode={darkMode}
@@ -291,8 +262,8 @@ const Index = () => {
           showMail={false}
         />
       )}
-      
-      {owlState === 'returning' && (
+
+      {!isMobile && owlState === 'returning' && (
         <Owl
           state="returning"
           isDarkMode={darkMode}
@@ -301,25 +272,27 @@ const Index = () => {
           showMail={false}
         />
       )}
-      
+
+      {/* Landing stage — shown on both mobile and desktop */}
       {stage === 'landing' && (
-        <LandingStage 
-          showHint={showHint} 
+        <LandingStage
+          showHint={showHint}
           isHiding={isLandingHiding}
           onSkipAnimation={handleSkipAnimation}
         />
       )}
 
+      {/* Resume stage */}
       {stage === 'resume' && (
         <>
-          <Navigation 
-            currentPage={activeSection} 
+          <Navigation
+            currentPage={activeSection}
             onPageChange={scrollToSection}
             babyOwlHatched={isEggHatched}
             onResetEgg={handleResetEgg}
           />
           <ThemeToggle isDarkMode={darkMode} onToggle={toggleTheme} />
-          
+
           <div className="relative z-10">
             {PAGES.map((page, idx) => (
               <section
@@ -330,7 +303,7 @@ const Index = () => {
                 <div className="relative w-full max-w-4xl">
                   {/* Background glow */}
                   <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl blur-xl" />
-                  
+
                   {/* Main parchment */}
                   <div className="relative parchment-texture min-h-[70vh] p-6 md:p-12 rounded-2xl border border-parchment-border/30 shadow-2xl">
                     {/* Decorative corners */}
@@ -338,8 +311,8 @@ const Index = () => {
                     <div className="absolute top-3 right-3 w-8 h-8 md:w-12 md:h-12 border-t-2 border-r-2 border-primary/30 rounded-tr-lg" />
                     <div className="absolute bottom-3 left-3 w-8 h-8 md:w-12 md:h-12 border-b-2 border-l-2 border-primary/30 rounded-bl-lg" />
                     <div className="absolute bottom-3 right-3 w-8 h-8 md:w-12 md:h-12 border-b-2 border-r-2 border-primary/30 rounded-br-lg" />
-                    
-                    {/* Content with scroll animation */}
+
+                    {/* Content */}
                     <ScrollSection index={idx}>
                       <page.component />
                     </ScrollSection>
