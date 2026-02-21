@@ -1,29 +1,11 @@
 const SkillsPage = () => {
   const skillCategories = [
-    {
-      title: 'Programming Languages',
-      skills: ['C', 'Java', 'JavaScript', 'SQL'],
-    },
-    {
-      title: 'Frontend Development',
-      skills: ['HTML5', 'CSS3', 'React.js', 'Responsive Design'],
-    },
-    {
-      title: 'Backend Development',
-      skills: ['Node.js', 'Express.js', 'WebSockets', 'REST APIs'],
-    },
-    {
-      title: 'Databases',
-      skills: ['PostgreSQL', 'MySQL', 'MongoDB'],
-    },
-    {
-      title: 'Tools & Platforms',
-      skills: ['Git', 'GitHub', 'Postman', 'VS Code', 'PyCharm', 'IntelliJ IDEA'],
-    },
-    {
-      title: 'Core Concepts',
-      skills: ['Data Structures & Algorithms', 'Problem Solving', 'Authentication', 'Database Design'],
-    },
+    { title: 'Programming Languages', skills: ['C', 'Java', 'JavaScript', 'SQL'] },
+    { title: 'Frontend Development', skills: ['HTML5', 'CSS3', 'React.js', 'Responsive Design'] },
+    { title: 'Backend Development', skills: ['Node.js', 'Express.js', 'WebSockets', 'REST APIs'] },
+    { title: 'Databases', skills: ['PostgreSQL', 'MySQL', 'MongoDB'] },
+    { title: 'Tools & Platforms', skills: ['Git', 'GitHub', 'Postman', 'VS Code', 'PyCharm', 'IntelliJ IDEA'] },
+    { title: 'Core Concepts', skills: ['Data Structures & Algorithms', 'Problem Solving', 'Authentication', 'Database Design'] },
   ];
 
   const allSkills = [
@@ -47,35 +29,39 @@ const SkillsPage = () => {
 
   const duplicatedSkills = [...allSkills, ...allSkills, ...allSkills, ...allSkills, ...allSkills];
 
+  const softSkills = ['Communication', 'Adaptability', 'Task Prioritization', 'Teamwork', 'Collaboration'];
+
+  const certifications = [
+    { name: 'Oracle Cloud Infrastructure 2025 Certified Architect Associate (OCI)', date: 'October 2025' },
+    { name: 'Software Engineering Job Simulation — J.P. Morgan Chase & Co.', date: 'September 2025' },
+    { name: 'Unix Shell Scripting — Global Academy of Technology', date: 'April–May 2025' },
+    { name: 'Python Programming & Libraries — Mevi Technologies LLP', date: 'August 2025' },
+    { name: 'Artificial Intelligence Foundations', date: 'April 2024' },
+  ];
+
   return (
     <div className="space-y-10 md:space-y-12 overflow-hidden">
-      {/* Header Section */}
+      {/* Header */}
       <div>
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-primary mb-4">
+        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
           Technical Skills
         </h2>
-        <div className="w-20 h-1 bg-gradient-to-r from-primary to-transparent mb-6" />
-        <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+        <div className="w-16 h-px bg-gradient-to-r from-primary to-transparent mb-6" />
+        <p className="font-sans text-base md:text-lg text-muted-foreground leading-relaxed">
           Technologies and tools I use to build robust, scalable applications
         </p>
       </div>
 
-      {/* Infinite Scrolling Row */}
+      {/* ── INFINITE SCROLL — UNTOUCHED ── */}
       <div className="relative py-16 overflow-hidden">
         <div className="absolute left-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-r from-background to-transparent z-[5] pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-l from-background to-transparent z-[5] pointer-events-none" />
-        
         <div className="skills-scroll-container">
           {duplicatedSkills.map((skill, idx) => (
             <div key={idx} className="skill-item group">
               <div className="skill-logo-wrapper">
                 <div className="skill-logo-box">
-                  <img
-                    src={skill.logo}
-                    alt={`${skill.name} logo`}
-                    className="skill-logo-img"
-                    loading="lazy"
-                  />
+                  <img src={skill.logo} alt={`${skill.name} logo`} className="skill-logo-img" loading="lazy" />
                 </div>
                 <div className="skill-glow" style={{ backgroundColor: skill.color }} />
               </div>
@@ -90,65 +76,55 @@ const SkillsPage = () => {
         </div>
       </div>
 
-      {/* Skills by Category */}
-      <div className="space-y-5">
-        <h3 className="text-xl md:text-2xl font-display font-semibold text-foreground mb-6">
+      {/* Skills by Category — table-style rows, no chips */}
+      <div>
+        <h3 className="font-display text-2xl md:text-3xl text-foreground mb-6">
           Skills by Category
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="glass-card overflow-hidden">
           {skillCategories.map((category, idx) => (
-            <div key={idx} className="glass-card p-5 hover:border-primary/50 transition-colors">
-              <h4 className="text-base md:text-lg font-semibold text-primary mb-3">
+            <div
+              key={idx}
+              className={`flex flex-col sm:flex-row gap-1 sm:gap-6 px-5 md:px-6 py-4 ${
+                idx !== skillCategories.length - 1 ? 'border-b border-border/50' : ''
+              }`}
+            >
+              <p className="font-sans font-semibold text-primary text-sm md:text-base w-full sm:w-52 flex-shrink-0">
                 {category.title}
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, skillIdx) => (
-                  <span
-                    key={skillIdx}
-                    className="px-3 py-1.5 text-xs md:text-sm bg-secondary text-foreground rounded-lg border border-border"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+              </p>
+              <p className="font-sans text-foreground text-sm md:text-base leading-relaxed">
+                {category.skills.join('  ·  ')}
+              </p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Soft Skills */}
+      {/* Soft Skills — clean inline text */}
       <div className="glass-card p-6 md:p-8 border-l-4 border-primary">
-        <h3 className="text-xl md:text-2xl font-display font-semibold text-foreground mb-4">
+        <h3 className="font-display text-xl md:text-2xl text-foreground mb-3">
           Soft Skills
         </h3>
-        <div className="flex flex-wrap gap-3">
-          {['Communication', 'Adaptability', 'Task Prioritization', 'Teamwork', 'Collaboration'].map((skill, idx) => (
-            <span
-              key={idx}
-              className="px-4 py-2 text-sm md:text-base bg-primary/10 text-primary rounded-xl font-medium border border-primary/20"
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
+        <p className="font-sans text-sm md:text-base text-foreground leading-relaxed">
+          {softSkills.join('  ·  ')}
+        </p>
       </div>
 
-      {/* Certifications */}
-      <div className="space-y-4">
-        <h3 className="text-xl md:text-2xl font-display font-semibold text-foreground">
+      {/* Certifications — clean list rows */}
+      <div>
+        <h3 className="font-display text-2xl md:text-3xl text-foreground mb-5">
           Certifications
         </h3>
-        <div className="space-y-3">
-          {[
-            { name: 'Oracle Cloud Infrastructure 2025 Certified Architect Associate (OCI)', date: 'October 2025' },
-            { name: 'Software Engineering Job Simulation — J.P. Morgan Chase & Co.', date: 'September 2025' },
-            { name: 'Unix Shell Scripting — Global Academy of Technology', date: 'April–May 2025' },
-            { name: 'Python Programming & Libraries — Mevi Technologies LLP', date: 'August 2025' },
-            { name: 'Artificial Intelligence Foundations', date: 'April 2024' },
-          ].map((cert, idx) => (
-            <div key={idx} className="glass-card p-4 md:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-              <p className="text-sm md:text-base text-foreground font-medium">{cert.name}</p>
-              <span className="text-xs md:text-sm text-muted-foreground">{cert.date}</span>
+        <div className="glass-card overflow-hidden">
+          {certifications.map((cert, idx) => (
+            <div
+              key={idx}
+              className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 px-5 md:px-6 py-4 ${
+                idx !== certifications.length - 1 ? 'border-b border-border/50' : ''
+              }`}
+            >
+              <p className="font-sans text-sm md:text-base text-foreground font-medium">{cert.name}</p>
+              <span className="font-sans text-xs md:text-sm text-muted-foreground whitespace-nowrap">{cert.date}</span>
             </div>
           ))}
         </div>
