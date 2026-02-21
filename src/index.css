@@ -102,6 +102,12 @@
   }
 
   @media (max-width: 768px) {
+    /* Owl position on landing page for mobile */
+    .Owl-landing {
+      bottom: 1rem !important;
+      right: 1rem !important;
+    }
+
     /* Fix navigation menu name truncation on mobile */
     nav h2 {
       font-size: 0.95rem !important;
