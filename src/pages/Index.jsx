@@ -48,7 +48,7 @@ const Index = () => {
   useEffect(() => { isEggHatchedRef.current = isEggHatched; }, [isEggHatched]);
   useEffect(() => { babyOwlStageRef.current = babyOwlStage; }, [babyOwlStage]);
 
-  // Check localStorage for hatched state on mount (desktop only)
+  // Check localStorage for hatched state on mount — desktop only
   useEffect(() => {
     if (isMobile) return;
     const hatched = localStorage.getItem('babyOwlHatched') === 'true';
@@ -59,6 +59,7 @@ const Index = () => {
     }
   }, [isMobile]);
 
+  // Branch visibility — desktop only
   useEffect(() => {
     if (isMobile) return;
     const parentOnBranch =
@@ -86,6 +87,7 @@ const Index = () => {
     }
   }, [darkMode]);
 
+  // Owl state on theme change — desktop only
   useEffect(() => {
     if (isMobile) return;
     if (
@@ -99,12 +101,9 @@ const Index = () => {
     }
   }, [darkMode, stage, isMobile]);
 
-
-
   // Track active section for nav highlighting
   useEffect(() => {
     if (stage !== 'resume') return;
-
     const observers = sectionRefs.current.map((ref, idx) => {
       if (!ref) return null;
       const observer = new IntersectionObserver(
@@ -118,13 +117,13 @@ const Index = () => {
       observer.observe(ref);
       return observer;
     });
-
     return () => { observers.forEach(obs => obs?.disconnect()); };
   }, [stage]);
 
+  // Owl click:
+  // - Landing stage: works identically on ALL devices (full animation)
+  // - Resume stage: desktop only (owl not rendered on mobile in resume)
   const handleOwlClick = useCallback(() => {
-    if (isMobile) return; // owl is not rendered on mobile, safety guard
-
     if (stage === 'landing') {
       setShowHint(false);
       setIsLandingHiding(true);
@@ -140,7 +139,10 @@ const Index = () => {
           setOwlState(darkMode ? 'sitting' : 'sleeping');
         }, 2500);
       }, 600);
+
     } else if (stage === 'resume') {
+      if (isMobile) return; // owl not shown in resume on mobile, safety guard
+
       if (darkMode) {
         setOwlState('disturbed');
         setTimeout(() => {
@@ -176,7 +178,6 @@ const Index = () => {
   const handleEggClick = useCallback(() => {
     if (isMobile) return;
     if (isEggHatched || babyOwlStage !== 'egg') return;
-
     setIsEggCracking(true);
     setTimeout(() => {
       setIsEggCracking(false);
@@ -218,10 +219,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-500 relative">
-      {/* Particle Background */}
       <ParticleBackground isDarkMode={darkMode} />
 
-      {/* ── DESKTOP ONLY: Branch, Nest, BabyOwl, Owl ── */}
+      {/* ── DESKTOP ONLY in resume stage ── */}
       {!isMobile && stage === 'resume' && <Branch />}
 
       {!isMobile && stage === 'resume' && (
@@ -242,16 +242,23 @@ const Index = () => {
         />
       )}
 
-      {/* Owl — visible on landing for both mobile & desktop, hidden on resume for mobile */}
-      {!(isMobile && stage === 'resume') && (owlState !== 'flyingAway' || stage !== 'resume') && owlState !== 'returning' && (
-        <Owl
-          state={owlState}
-          isDarkMode={darkMode}
-          stage={stage}
-          onClick={handleOwlClick}
-          showMail={showMail}
-        />
-      )}
+      {/*
+        Owl rendering:
+        - Landing stage → show on ALL devices (full animation)
+        - Resume stage  → show on DESKTOP only
+      */}
+      {(stage === 'landing' || !isMobile) &&
+        (owlState !== 'flyingAway' || stage !== 'resume') &&
+        owlState !== 'returning' && (
+          <Owl
+            state={owlState}
+            isDarkMode={darkMode}
+            stage={stage}
+            onClick={handleOwlClick}
+            showMail={showMail}
+          />
+        )
+      }
 
       {!isMobile && owlState === 'flyingAway' && (
         <Owl
@@ -273,7 +280,7 @@ const Index = () => {
         />
       )}
 
-      {/* Landing stage — shown on both mobile and desktop */}
+      {/* Landing stage — identical on ALL devices */}
       {stage === 'landing' && (
         <LandingStage
           showHint={showHint}
@@ -290,6 +297,7 @@ const Index = () => {
             onPageChange={scrollToSection}
             babyOwlHatched={isEggHatched}
             onResetEgg={handleResetEgg}
+            isMobile={isMobile}
           />
           <ThemeToggle isDarkMode={darkMode} onToggle={toggleTheme} />
 
@@ -301,18 +309,12 @@ const Index = () => {
                 className="min-h-screen flex items-start justify-center p-4 md:p-8 pt-20 md:pt-24 pb-8"
               >
                 <div className="relative w-full max-w-4xl">
-                  {/* Background glow */}
                   <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl blur-xl" />
-
-                  {/* Main parchment */}
                   <div className="relative parchment-texture min-h-[70vh] p-6 md:p-12 rounded-2xl border border-parchment-border/30 shadow-2xl">
-                    {/* Decorative corners */}
                     <div className="absolute top-3 left-3 w-8 h-8 md:w-12 md:h-12 border-t-2 border-l-2 border-primary/30 rounded-tl-lg" />
                     <div className="absolute top-3 right-3 w-8 h-8 md:w-12 md:h-12 border-t-2 border-r-2 border-primary/30 rounded-tr-lg" />
                     <div className="absolute bottom-3 left-3 w-8 h-8 md:w-12 md:h-12 border-b-2 border-l-2 border-primary/30 rounded-bl-lg" />
                     <div className="absolute bottom-3 right-3 w-8 h-8 md:w-12 md:h-12 border-b-2 border-r-2 border-primary/30 rounded-br-lg" />
-
-                    {/* Content */}
                     <ScrollSection index={idx}>
                       <page.component />
                     </ScrollSection>
